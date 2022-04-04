@@ -1,4 +1,4 @@
-** Checking the Status of Your Files**
+<p>** Checking the Status of Your Files**</p>
 The main tool you use to determine which files are in which state is the git status command. If you run this command directly after a clone, you should see something like this:
 
 <ins>$ git status
