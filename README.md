@@ -123,12 +123,12 @@ git merge --abort = abort a merge during a merge conflict situation
 Retrieve/download from a remote 
  git fetch (remote name)
 
-**merge branch or tracking-branch **
+**merge branch or tracking-branch**
  git merge (branch or tracking branch name) ex.: git merge origin/master
 
 **2 Step in one**
 We can do the fetch and merge in one step with 
-git pull
+_<ins>git pull</ins>_
 
 **push into origin master branch**
 to push into GitHub, we need to push it to the origin and select the branch ex.:
