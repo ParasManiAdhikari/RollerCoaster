@@ -1,12 +1,13 @@
-<p><h3><b>Checking the Status of Your Files</b></h3></p>
+<h1>Gitlab Orders</h1>
+<p><h3>Checking the Status of Your Files</h3></p>
 The main tool you use to determine which files are in which state is the git status command. If you run this command directly after a clone, you should see something like this:
 
-<p><h3><ins>$ git status</ins></h3><p>
+<p><ins>$ git status</ins><p>
 <p><ins>On branch master</ins><p>
 <p><ins>Your branch is up-to-date with 'origin/master'.</ins><p>
 <p><ins>nothing to commit, working tree clean</ins><p>
 
-<p><h3><b>Short Status</b></h3></p>
+<p><h3>Short Status</h3></p>
 If you run git status -s or git status --short you get a far more simplified output from the command:
 <p><ins>$ git status -s</ins></p>
 <p><ins> M README</ins></p>
@@ -18,7 +19,7 @@ If you run git status -s or git status --short you get a far more simplified out
 
 New files that aren’t tracked have a **??**
 
-<p><h3><b>Tracking New Files</b></h3></p>
+<p><h3>Tracking New Files</h3></p>
 To begin tracking a new file, you use the command git add. To begin tracking the README file, you can run this:
 <p><ins>$ git add README</ins></p>
 If you run your status command again, you can see that your README file is now tracked and staged to be committed:
@@ -32,7 +33,7 @@ If you run your status command again, you can see that your README file is now t
 if (<ins>git add test.c</ins>) and then we **updated** the (test.c) file then we **must** (<ins>git add test.c</ins>) again or the Git will take only the first add without the update.
 
 
-<p><h3><b>Committing Your Changes</b></h3></p>
+<p><h3>Committing Your Changes</h3></p>
 <p><ins>$ git commit -m "commit massege here"</ins></p>
 
  Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part:
@@ -40,7 +41,7 @@ if (<ins>git add test.c</ins>) and then we **updated** the (test.c) file then we
 
 
 
-<p><h3><b>Removing Files</b></h3></p>
+<p><h3>Removing Files</h3></p>
 The git rm command does that and removes the file from your working directory so you don’t see it as an untracked file the next time around.
 <p><ins>$ rm PROJECTS.md</ins></p>
 <p><ins>$ git status</ins></p>
@@ -63,23 +64,23 @@ Then, if you run git rm, it stages the file’s removal:
   <p><ins>  deleted:    PROJECTS.md</ins></p>
 
 
-<p><h3><b>Viewing the Commit History</b></h3></p>
+<p><h3>Viewing the Commit History</h3></p>
 he most basic and powerful tool to do this is the git log command.
 
 <ins>git log -p</ins>  : to see the difference in the commits
 
 
 
-<p><h3><b>retrieve a file from the staging area into the working tree</b></h3></p>
+<p><h3>retrieve a file from the staging area into the working tree</h3></p>
 to take back what u did but without making the ADD to Git (Working Tree)
 <p><ins>git checkout -- filename </ins></p>
-<p><b>retrieve a file from the latest commit into the staging area</b></p>
+<p><h3>retrieve a file from the latest commit into the staging area</h3></p>
 to take back what u did but after making the ADD to Git and before the commit (Staging area)
 <p><ins>git reset HEAD filename </ins></p>
 and then u need to (because it is now in the Working tree area) 
 <p><ins>git checkout -- filename  </ins> </p>
 
-<p><h3><b>retrieve a file from a previous commit</b></h3></p>
+<p><h3>retrieve a file from a previous commit</h3></p>
 
 if we delete any file that we committed it already then, we want to know the commit Hash, so we see the log of the file we want to restore
 <p>1-<ins> git log – file name</ins></p>
@@ -87,22 +88,22 @@ the we take the 5 chars from the commit Hash and then:
 <p>3-<ins> git checkout (commit hash first 5 chars in the commit hash) -- filename </ins></p>
 
 
-<p><h1><b>Branches</b></h1></p>
+<p><h1>Branches</h1></p>
 
-<p><h3><b>show the branches </b></h3></p>
+<p><h3>show the branches </h3></p>
 <ins>git branch</ins> :  the Head will be Green
 
 
-<p><h3><b>create a branch </b></h3></p>
+<p><h3>create a branch </h3></p>
 <ins>git branch (branch-name) </ins>
 
 
-<p><h3><b>Change the branch/checkout a branch/move head pointer</b></h3></p>
+<p><h3>Change the branch/checkout a branch/move head pointer</h3></p>
 
 <ins>git checkout (branch-name)</ins> = will change the current branch to the (branch-name)
 
 
-<p><h3><b>see the diff between 3 branches</b></h3></p>
+<p><h3>see the diff between 3 branches</h3></p>
 <ins>git diff master..Other</ins>
 
 <p><h3>merge branches</h3></p>
@@ -114,7 +115,7 @@ the we take the 5 chars from the commit Hash and then:
  <p><ins>git branch -d (branch-name)</ins>  = only if already merged</p>
  <p><ins>git branch -D (branch-name)</ins> = delete a branch, including if not already merged (exercise caution here) </p>
 
-<p><h3><b>merge conflict situation</b></h3></p>
+<p><h3>merge conflict situation</h3></p>
 <ins>git merge --abort</ins> = abort a merge during a merge conflict situation
 
 
