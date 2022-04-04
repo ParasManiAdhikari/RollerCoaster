@@ -1,92 +1,135 @@
-# Softwaretechnik 2 Praktikum
+** Checking the Status of Your Files**
+The main tool you use to determine which files are in which state is the git status command. If you run this command directly after a clone, you should see something like this:
+
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+
+**Short Status**
+If you run git status -s or git status --short you get a far more simplified output from the command:
+$ git status -s
+ M README
+MM Rakefile
+A  lib/git.rb
+M  lib/simplegit.rb
+?? LICENSE.txt
+
+New files that aren’t tracked have a ??
+
+**Tracking New Files**
+To begin tracking a new file, you use the command git add. To begin tracking the README file, you can run this:
+$ git add README
+If you run your status command again, you can see that your README file is now tracked and staged to be committed:
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+    new file:   README
+
+if (git add test.c) and then we updated the (test.c) file then we must (git add test.c) again or the Git will take only the first add without the update.
+
+
+**Committing Your Changes**
+$ git commit -m "commit massege here"
+
+ Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the git add part:
+$ git commit -a -m 'Add new benchmarks'
 
 
 
-## Getting started
+**Removing Files**
+The git rm command does that and removes the file from your working directory so you don’t see it as an untracked file the next time around.
+$ rm PROJECTS.md
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)      deleted:    PROJECTS.md
+no changes added to commit (use "git add" and/or "git commit -a")
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Then, if you run git rm, it stages the file’s removal:
+$ git rm PROJECTS.md
+rm 'PROJECTS.md'
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+    deleted:    PROJECTS.md
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+**Viewing the Commit History**
+he most basic and powerful tool to do this is the git log command.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+git log -p  : to see the difference in the commits
 
-```
-cd existing_repo
-git remote add origin https://git.mylab.th-luebeck.de/jannik.moetsch/softwaretechnik-2-praktikum.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.mylab.th-luebeck.de/jannik.moetsch/softwaretechnik-2-praktikum/-/settings/integrations)
+**retrieve a file from the staging area into the working tree**
+to take back what u did but without making the ADD to Git (Working Tree)
+git checkout -- filename 
+retrieve a file from the latest commit into the staging area
+to take back what u did but after making the ADD to Git and before the commit (Staging area)
+git reset HEAD filename 
+and then u need to (because it is now in the Working tree area) 
+git checkout -- filename   
 
-## Collaborate with your team
+**retrieve a file from a previous commit**
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+if we delete any file that we committed it already then, we want to know the commit Hash, so we see the log of the file we want to restore
+1- git log – file name
+the we take the 5 chars from the commit Hash and then:
+2- git checkout (commit hash first 5 chars in the commit hash) -- filename 
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
+****Branches****
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+**show the branches **
+git branch :  the Head will be Green
 
-***
 
-# Editing this README
+**create a branch **
+git branch (branch-name) 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+**Change the branch/checkout a branch/move head pointer**
 
-## Name
-Choose a self-explaining name for your project.
+git checkout (branch-name) = will change the current branch to the (branch-name)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**see the diff between 2 branches**
+git diff master..Other
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+**merge branches**
+git merge (branch-name)  = (fast-forward and 3-way merges)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+ git branch --merged = see branches merged into the current branch
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**delete a branch**
+ git branch -d (branch-name)  = only if already merged
+ git branch -D (branch-name) = delete a branch, including if not already merged (exercise caution here) 
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+**merge conflict situation **
+git merge --abort = abort a merge during a merge conflict situation
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+****Remotes****
+Retrieve/download from a remote 
+ git fetch (remote name)
 
-## License
-For open source projects, say how it is licensed.
+**merge branch or tracking-branch **
+ git merge (branch or tracking branch name) ex.: git merge origin/master
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+**2 Step in one**
+We can do the fetch and merge in one step with 
+git pull
+
+**push into origin master branch**
+to push into GitHub, we need to push it to the origin and select the branch ex.:
+git push origin master     (origin is GitHub and master is our branch)
