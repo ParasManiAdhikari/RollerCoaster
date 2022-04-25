@@ -14,16 +14,11 @@
 # For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
 
 
-stages:
-  - clean          # List of stages for jobs, and their order of execution
+stages:      # List of stages for jobs, and their order of execution
   - build
   - test
   - deploy
 
-clean-job:
-  stage: clean
-  script:
-    - $MAVEN_HOME/bin/mvn clean
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -34,6 +29,7 @@ build-job:       # This job runs in the build stage, which runs first.
 Templatetest:
   stage: test
   script:
+    - $MAVEN_HOME/bin/mvn clean
     - mvn -Dtest:Swt2praktikumApplicationTests test
 
 unit-test-job:   # This job runs in the test stage.
