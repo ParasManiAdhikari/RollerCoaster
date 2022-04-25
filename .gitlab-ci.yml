@@ -26,11 +26,10 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
 
-Templatetest:
-  stage: test
+build:
+  stage: build
   script:
-    - $MAVEN_HOME/bin/mvn clean
-    - mvn -Dtest:Swt2praktikumApplicationTests test
+    - mvn package -U
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
