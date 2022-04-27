@@ -11,3 +11,5 @@ class Swt2praktikumApplicationTests {
 	}
 
 }
+
+// de.th_luebeck.swt2praktikum.Swt2praktikumApplicationTests
