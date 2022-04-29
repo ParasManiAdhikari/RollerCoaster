@@ -33,12 +33,14 @@ public class User {
      * @param password the user's password
      * @param email the user's email
      */
-    public User(String name, String email, String userName, String password) {
+    public User( String userName, String password, String email,String name) {
         this.name = name;
         this.email = email;
         this.userName = userName;
         this.password = password;
     }
+
+
 
 
     @Override

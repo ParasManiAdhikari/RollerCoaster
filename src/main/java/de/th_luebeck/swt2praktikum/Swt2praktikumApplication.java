@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 @EnableTransactionManagement
 public class Swt2praktikumApplication implements WebMvcConfigurer {
 
@@ -16,9 +16,9 @@ public class Swt2praktikumApplication implements WebMvcConfigurer {
 		SpringApplication.run(Swt2praktikumApplication.class, args);
 	}
 
-	@Override
+/*	@Override
 	public void addViewControllers(ViewControllerRegistry viewControllerRegistry) {
 		viewControllerRegistry.addViewController("/index").setViewName("index");
-	}
+	}*/
 
 }

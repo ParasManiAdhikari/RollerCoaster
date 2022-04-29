@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @author Baraa
      * Get a user by username from the database
      */
-    User findByName(String name);
+    User findByUserName(String name);
     /**
      * @author Baraa
      * Get a user by email from the database
