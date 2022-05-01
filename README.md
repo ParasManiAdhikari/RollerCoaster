@@ -15,7 +15,6 @@ If you run git status -s or git status --short you get a far more simplified out
 <p><ins>A  lib/git.rb</ins></p>
 <p><ins>M  lib/simplegit.rb</ins></p>
 <p><ins>?? LICENSE.txt</ins></p>
-#testparas
 
 New files that aren’t tracked have a **??**
 
