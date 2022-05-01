@@ -16,14 +16,4 @@ import javax.validation.Valid;
 public class UserController {
     private UserRepository userRepository;
 
-    @GetMapping("/register")
-    public String registerUser(@Valid User user, BindingResult result, Model model){
-        if(result.hasErrors()){
-            return "register";
-        }
-
-        userRepository.save(user);
-        return "redirect:/index";
-    }
-
 }
