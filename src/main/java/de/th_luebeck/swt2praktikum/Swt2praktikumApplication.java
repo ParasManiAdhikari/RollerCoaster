@@ -17,9 +17,9 @@ public class Swt2praktikumApplication implements WebMvcConfigurer {
 		SpringApplication.run(Swt2praktikumApplication.class, args);
 	}
 
-/*	@Override
+	@Override
 	public void addViewControllers(ViewControllerRegistry viewControllerRegistry) {
 		viewControllerRegistry.addViewController("/index").setViewName("index");
-	}*/
+	}
 
 }
