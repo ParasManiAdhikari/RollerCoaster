@@ -40,9 +40,6 @@ public class User {
         this.password = password;
     }
 
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

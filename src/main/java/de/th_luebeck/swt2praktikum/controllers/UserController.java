@@ -16,4 +16,11 @@ import javax.validation.Valid;
 public class UserController {
     private UserRepository userRepository;
 
+    public void deleteUser() {
+        User user_delete = userRepository.findByEmail("");
+
+        userRepository.removeByFirstName("");
+    }
+
+
 }
