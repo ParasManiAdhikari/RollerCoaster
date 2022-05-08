@@ -1,5 +1,6 @@
 package de.th_luebeck.swt2praktikum.controllers;
 
+import de.th_luebeck.swt2praktikum.controllers.registration.RegistrationInput;
 import de.th_luebeck.swt2praktikum.entities.User;
 import de.th_luebeck.swt2praktikum.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,26 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
+
     private UserRepository userRepository;
 
     public void deleteUser() {
-        User user_delete = userRepository.findByEmail("");
 
-        userRepository.removeByFirstName("");
+        User user_delete = userRepository.findByUserName("Paras");
+        userRepository.delete(user_delete);
     }
 
 
+    @PostMapping("/kontoansicht")
+    public String konto_loeschen(Model model) {
+
+        return "redirect:/login";
+    }
+
+
+    @GetMapping("/kontoansicht")
+    public String kontoSicht(Model model) {
+        model.addAttribute("kontoansichtAttr", new RegistrationInput());
+        return "kontoansicht";
+    }
 }

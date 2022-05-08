@@ -76,6 +76,7 @@ public class RegistrationController {
         model.addAttribute("kontoansichtAttr", new RegistrationInput());
         return "kontoansicht";
     }
+
     /**
      * @param registrationInput contains the user input from the html form
      * @return redirect to /login

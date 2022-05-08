@@ -2,10 +2,10 @@ package de.th_luebeck.swt2praktikum.repositories;
 
 import de.th_luebeck.swt2praktikum.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 
 import java.util.List;
 
@@ -22,5 +22,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
      */
     User findByEmail(String email);
 
-    List<User> removeByFirstName(String firstName);
+    void delete(User user_delete);
 }
