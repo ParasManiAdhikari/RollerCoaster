@@ -71,16 +71,11 @@ public class RegistrationController {
         return "registration";
     }
 
-    @GetMapping("/kontoansicht")
-    public String kontoSicht(Model model) {
-        model.addAttribute("kontoansichtAttr", new RegistrationInput());
-        return "kontoansicht";
-    }
     /**
      * @param registrationInput contains the user input from the html form
      * @return redirect to /login
      */
-    @PostMapping("/r")
+    @PostMapping("/")
     public String registration(@ModelAttribute("registrationInput") RegistrationInput registrationInput) {
         userRepository.save(new User(registrationInput.getUserName(),
                 BCrypt.hashpw(registrationInput.getPassword(), BCrypt.gensalt()),
