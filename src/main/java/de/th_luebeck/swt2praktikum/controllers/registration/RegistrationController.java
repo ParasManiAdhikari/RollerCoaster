@@ -2,6 +2,9 @@ package de.th_luebeck.swt2praktikum.controllers.registration;
 
 import de.th_luebeck.swt2praktikum.entities.User;
 import de.th_luebeck.swt2praktikum.repositories.UserRepository;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+
+/**
+ * The type Registration controller.
+ */
 @Controller
 public class RegistrationController {
 
@@ -21,12 +28,14 @@ public class RegistrationController {
     private UserRepository userRepository;
 
 
-    /** @Autor    Baraa Hejazi
+    /**
+     * Registration check string.
+     *
      * @param registrationInput contains the user input from the html form
-     * @param bindingResult     check if inputs are allowed
-     *                          then able to change inputs at /registration else
+     * @param bindingResult     check if inputs are allowed                          then able to change inputs at /registration else
      * @param model             connection to registration input class
      * @return redirect to /login
+     * @autor Baraa Hejazi
      */
     @PostMapping("/registration")
     public String registrationCheck(@Valid RegistrationInput registrationInput, BindingResult bindingResult, Model model) {
@@ -62,6 +71,8 @@ public class RegistrationController {
     }
 
     /**
+     * Registration string.
+     *
      * @param model for linking a class which contains the user input
      * @return name of .html file
      */
@@ -72,6 +83,8 @@ public class RegistrationController {
     }
 
     /**
+     * Registration string.
+     *
      * @param registrationInput contains the user input from the html form
      * @return redirect to /login
      */

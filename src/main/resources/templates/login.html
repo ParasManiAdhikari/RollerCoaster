@@ -18,10 +18,10 @@
             crossorigin="anonymous"></script>
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
-    <a class="navbar-brand" href="index.html">TH Park</a>
+    <a class="navbar-brand" href="index">TH Park</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="registration">Registration</a></li>
         </ul>
     </div>
 </nav>
@@ -31,22 +31,24 @@
     <h2 class="mb-5">Login</h2>
     <div class="row">
         <div class="col-md-6">
-            <form th:action="@{/login}" th:method="post">
+            <form th:action="@{/login}" th:method="post" th:object="${loginInput}">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="Username" class="col-form-label">Username</label>
-                        <input type="text" class="form-control" id="Username" placeholder="Username" required>
+                        <input type="text" class="form-control" id="Username" placeholder="Username" th:field="*{userName}" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="Password">Passwort</label>
-                        <input type="password" class="form-control" id="Password" placeholder="Passwort" required>
+                        <input type="password" class="form-control" id="Password" placeholder="Passwort" th:field="*{userPassword}" required>
                     </div>
                 </div>
+                <div class="alert" th:text="${errorMsg}"></div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Anmelden">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Anmelden">
+                        <a href="/registration" type="button" class="btn btn-primary">Registrieren</a>
                     </div>
                 </div>
             </form>

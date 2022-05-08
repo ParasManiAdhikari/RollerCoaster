@@ -1,27 +1,37 @@
 package de.th_luebeck.swt2praktikum.entities;
 
 
+import lombok.Data;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
+@Table(name = "tbl_User")
 public class User {
     /**
      * The GenerationType.AUTO is the default generation type and
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="id", updatable = false)
     private long id;
 
     /**
      * Fields to be stored as a user's information.
      */
+
+    @Column(name = "name",nullable = false)
     private String name;
 
+    @Column(name = "email" , unique = true,nullable = false)
     private String email;
 
+    @Column(name = "username",unique = true,nullable = false)
     private String userName;
 
+    @Column(name = "password",nullable = false)
     private String password;
 
     public User() {}
