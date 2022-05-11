@@ -17,6 +17,4 @@ public class DeleteUserTest {
         assertThat(controller).isNotNull();
     }
 
-
-
 }
