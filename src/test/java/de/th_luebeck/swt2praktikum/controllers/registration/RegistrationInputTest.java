@@ -1,11 +1,11 @@
-package de.th_luebeck.swt2praktikum.registration;
+package de.th_luebeck.swt2praktikum.controllers.registration;
 
 import de.th_luebeck.swt2praktikum.controllers.registration.RegistrationInput;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class registrationInputTest {
+class RegistrationInputTest {
 
     @Test
     void testUsername() {
