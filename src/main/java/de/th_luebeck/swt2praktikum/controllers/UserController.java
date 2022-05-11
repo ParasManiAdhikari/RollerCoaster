@@ -24,6 +24,7 @@ public class UserController {
         userRepository.delete(user_delete);
     }
 
+    /*
 
     @PostMapping("/kontoansicht")
     public String konto_loeschen(Model model) {
@@ -37,4 +38,7 @@ public class UserController {
         model.addAttribute("kontoansichtAttr", new RegistrationInput());
         return "kontoansicht";
     }
+
+
+     */
 }
