@@ -16,4 +16,12 @@ import javax.validation.Valid;
 public class UserController {
     private UserRepository userRepository;
 
+    public UserController(UserRepository rep) {
+    }
+
+    @PostMapping(value = "/logout")
+    public String logout(User user, BindingResult mockedBindingResult, Model mockedModel) {
+        // log out the user and go to homepage
+        return "redirect:/index";
+    }
 }
