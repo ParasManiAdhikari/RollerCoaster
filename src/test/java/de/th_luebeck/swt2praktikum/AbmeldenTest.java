@@ -1,4 +1,4 @@
-package de.th_luebeck.swt2praktikum.controllers.Login;
+package de.th_luebeck.swt2praktikum;
 
 import de.th_luebeck.swt2praktikum.controllers.UserController;
 import de.th_luebeck.swt2praktikum.entities.User;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class LoginControllerTest {
+class AbmeldenTest{
 
     private static UserController userController;
     private static UserRepository mockedUserRepository;
