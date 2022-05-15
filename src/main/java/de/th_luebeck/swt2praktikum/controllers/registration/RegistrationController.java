@@ -82,6 +82,11 @@ public class RegistrationController {
         return "registration";
     }
 
+    @GetMapping("/kontoansicht")
+    public String kontoSicht(Model model) {
+        model.addAttribute("kontoansichtAttr", new RegistrationInput());
+        return "kontoansicht";
+    }
     /**
      * Registration string.
      *

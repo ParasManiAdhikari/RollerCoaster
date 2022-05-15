@@ -29,6 +29,12 @@ Templatetest:
     - $MAVEN_HOME/bin/mvn clean
     - mvn -Dtest:Swt2praktikumApplicationTests test
 
+DeleteUserTest:
+  stage: test
+  script:
+    - mvn -Dtest:DeleteUserTest test
+
+
 AbmeldenTest:
   stage: test
   script:
