@@ -47,6 +47,7 @@ public class User {
         return Objects.equals(id, user.id) && Objects.equals(userName, user.userName)
                 && Objects.equals(password, user.password) && Objects.equals(email, user.email);
     }
+
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", email=" + email + "username" + userName + '}';
