@@ -32,7 +32,7 @@ public class DeleteUserTest {
 
     @Test
     public void contextLoads() throws Exception {
-        //   assertThat(controller).isNotNull();
+        //   assertThat(controller).isNotNull(); asd
     }
     @Autowired
     private UserRepository userRepository;
