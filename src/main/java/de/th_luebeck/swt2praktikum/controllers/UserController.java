@@ -10,35 +10,24 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
 @Controller
 public class UserController {
 
+    @Autowired
     private UserRepository userRepository;
 
-    public void deleteUser() {
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
 
-        User user_delete = userRepository.findByUserName("Paras");
-        userRepository.delete(user_delete);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        userRepository.delete(user);
+        System.out.println("Deleted User");
+        return "redirect:/index";
     }
 
-    /*
-
-    @PostMapping("/kontoansicht")
-    public String konto_loeschen(Model model) {
-
-        return "redirect:/login";
-    }
-
-
-    @GetMapping("/kontoansicht")
-    public String kontoSicht(Model model) {
-        model.addAttribute("kontoansichtAttr", new RegistrationInput());
-        return "kontoansicht";
-    }
-
-
-     */
 }

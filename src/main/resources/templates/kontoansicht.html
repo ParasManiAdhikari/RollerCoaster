@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -92,18 +92,22 @@
                         gelöscht.</p>
                 </div>
                 <div class="modal-footer">
+                    <div th:switch="${users}">
+                    <h2 th:case="null">No users yet!</h2>
                     <!-- Backend: Add onclick delete account method-->
-                    <input  onclick="deleteUser()"
-                            type="button"
-                            class="btn btn-outline-danger"
-                            data-dismiss="modal">
+                    <tr th:each="user : ${users}">
+                    <input th:href="@{/delete/{id}(id=${user.id})}"
+                        type="button"
+                        class="btn btn-outline-danger"
+                        data-dismiss="modal">
                         Ja, löschen!
-                    </input>
+                        </input>
+                    </tr>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-
 </html>

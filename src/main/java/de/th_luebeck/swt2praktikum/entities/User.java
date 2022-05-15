@@ -1,6 +1,5 @@
 package de.th_luebeck.swt2praktikum.entities;
 
-
 import javax.persistence.*;
 import java.util.Objects;
 
