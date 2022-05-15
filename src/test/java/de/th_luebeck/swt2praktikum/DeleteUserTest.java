@@ -65,8 +65,4 @@ public class DeleteUserTest {
 
     }
 
-    // user1 = new User(id =123)
-    // assertthat(delete(user1).isEmpty())
-
-
 }
