@@ -1,0 +1,6 @@
+name, Username, password, passwordConfirm, email, checkbox
+baraa, BobsBurger, BobsPassword, BobsPassword, BobsEmail@gmail.com, true
+bara, AnotherBob, AnotherBobsPassword, AnotherBobsPassword, AnotherBobsEmail@gmail.com, true
+bar, SomeOtherPerson, SomeOthersPassword, SomeOthersPassword, SomeOthersEmail@gmail.com, true
+ba, ThisShouldBeEnough, ThisShouldBeEnoughPassword, ThisShouldBeEnoughPassword, ThisShouldBeEnoughEmail@gmail.com, true
+b, TheVeryLasUsername, TheVeryLastPassword, TheVeryLastPassword, TheVeryLastEmail@web.de, true

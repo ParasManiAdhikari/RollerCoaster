@@ -23,11 +23,10 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "Compiling the code..."
     - echo "Compile complete."
 
-Templatetest:
+RegistrationTest:
   stage: test
   script:
-    - $MAVEN_HOME/bin/mvn clean
-    - mvn -Dtest:Swt2praktikumApplicationTests test
+    - mvn -Dtest:RegistrationControllerTest test
 
 DeleteUserTest:
   stage: test
