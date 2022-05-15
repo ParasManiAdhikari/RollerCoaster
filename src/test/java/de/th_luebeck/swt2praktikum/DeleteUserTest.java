@@ -17,9 +17,7 @@ public class DeleteUserTest {
         assertThat(controller).isNotNull();
     }
 
-
     // user1 = new User(id =123)
     // assertthat(delete(user1).isEmpty())
-
 
 }
