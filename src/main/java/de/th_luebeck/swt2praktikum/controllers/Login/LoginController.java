@@ -46,12 +46,10 @@ public class LoginController {
         final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = "redirect:/dashboard";
         if (userFound == null || !encoder.matches(loginInput.getUserPassword(), userFound.getPassword())) {
-            System.out.println(userFound);
             model.addAttribute("errorMsg", "Invalid Username or Password");
             result = "login";
         }
         else if (userFound != null && encoder.matches(loginInput.getUserPassword(), userFound.getPassword()) ){
-            System.out.println(userFound);
             request.getSession().setAttribute("USER_ID", userFound.getId());
         return dashboard();
         }
