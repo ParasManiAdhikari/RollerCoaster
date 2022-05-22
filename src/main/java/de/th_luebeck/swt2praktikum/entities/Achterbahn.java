@@ -4,13 +4,12 @@ package de.th_luebeck.swt2praktikum.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 
 @Entity
 @Data
-@Table(name = "tbl_Park")
+@Table(name = "tbl_Achterbahn")
 public class Achterbahn {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
