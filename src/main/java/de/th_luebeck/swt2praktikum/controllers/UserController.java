@@ -39,4 +39,11 @@ public class UserController {
         // log out the user and go to homepage
         return "redirect:/index";
     }
+
+    @GetMapping("/kontoansicht/{id}")
+    public String getUserDetails(@PathVariable("id") long id, Model model) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+        return "kontoansicht";
+    }
 }

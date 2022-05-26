@@ -86,7 +86,7 @@ public class ParkController {
         parkRepository.save(new Park(Parkinput.getName(),
                         Parkinput.getEmailadress(), Parkinput.getAdresse(),
                 Parkinput.getFaxnummer(),Parkinput.getTelefonnummer()));
-        return "redirect:/dashboard";
+        return "redirect:/showparks";
     }
 
     /**
@@ -98,4 +98,16 @@ public class ParkController {
     public String dashboard() {
         return "dashboard";
     }
+
+    @GetMapping("/showparks")
+    public String showParks(Model model){
+        model.addAttribute("parks", parkRepository.findAll());
+        return "parks";
+    }
+
+    @GetMapping("/erlebnispark")
+    public String chosenPark(Model model){
+        return "erlebnispark";
+    }
+
 }

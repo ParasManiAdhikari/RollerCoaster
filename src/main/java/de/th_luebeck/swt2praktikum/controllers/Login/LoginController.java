@@ -72,4 +72,19 @@ public class LoginController {
         return "kontoansicht";
     }
 
+    // comment out to use h2 database, other times comment in for logout to work.
+
+//    @PostMapping(value = "/logout", params = "submit")
+//    public String doLogout(){
+//        return "login";
+//    }
+//
+//    @Configuration
+//    @EnableWebSecurity
+//    public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
+//        @Override
+//        protected void configure(final HttpSecurity http) throws Exception {
+//            http.logout();
+//        }
+//    }
 }
