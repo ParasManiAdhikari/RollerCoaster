@@ -37,7 +37,7 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="/kontoansicht">Kontoansicht</a></li>
-            <li class="nav-item"><a class="nav-link" href="logout">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
         </ul>
     </div>
 </nav>
@@ -70,8 +70,8 @@
             <tr th:each="park : ${parks}">
                 <td><a href="/erlebnispark" th:text="${park.name}"></a></td>
                 <td th:text="${park.adress}"></td>
-                <td><a th:href="@{/kontoansicht}" class="btn btn-warning">Edit</a></td>
-                <td><a th:href="@{/kontoansicht}" class="btn btn-danger">Dlt</a></td>
+                <td><a th:href="@{/showparks}" class="btn btn-warning">Edit</a></td>
+                <td><a th:href="@{/showparks}" class="btn btn-danger">Dlt</a></td>
             </tr>
             </tbody>
         </table>
