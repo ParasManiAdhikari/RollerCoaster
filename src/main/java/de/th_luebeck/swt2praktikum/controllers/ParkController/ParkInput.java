@@ -28,6 +28,16 @@ public class ParkInput {
     @NotNull
     private String faxnummer;
 
+    public ParkInput() {
+    }
+
+    public ParkInput(String name, String email, String address, String fax, String telefon){
+        this.name = name;
+        this.emailadress = email;
+        this.adresse = address;
+        this.faxnummer = fax;
+        this.telefonnummer = telefon;
+    }
    public String getEmail(){
        return this.emailadress;
    }
