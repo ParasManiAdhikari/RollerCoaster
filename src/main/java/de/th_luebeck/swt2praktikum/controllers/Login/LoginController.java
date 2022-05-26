@@ -73,6 +73,7 @@ public class LoginController {
     }
 
     // comment out to use h2 database, other times comment in for logout to work.
+    //
 
 //    @PostMapping(value = "/logout", params = "submit")
 //    public String doLogout(){
