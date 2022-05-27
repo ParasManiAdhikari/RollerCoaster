@@ -7,4 +7,13 @@ public class DashboardController {
     public String dashboard() {
         return "dashboard";
     }
+
+    @GetMapping("/parks/index")
+    public String returnIndexfromPark() {
+        return "redirect:/index";
+    }
+    @GetMapping("/parks/parks")
+    public String redirectToPark() {
+        return "redirect:/showparks";
+    }
 }
