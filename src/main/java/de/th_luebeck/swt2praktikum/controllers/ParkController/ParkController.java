@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -101,13 +102,15 @@ public class ParkController {
 
     @GetMapping("/showparks")
     public String showParks(Model model){
-        model.addAttribute("parks", parkRepository.findAll());
+        model.addAttribute("allparks", parkRepository.findAll());
         return "parks";
     }
 
-    @GetMapping("/erlebnispark")
-    public String chosenPark(Model model){
-        return "erlebnispark";
+    @GetMapping("/parks/{id}")
+    public String chosenPark(@PathVariable("id") long myid, Model model){
+        Park chosenpark = parkRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid park Id:" + myid));
+        model.addAttribute("mypark", chosenpark);
+        return "dynamicpark";
     }
 
 }

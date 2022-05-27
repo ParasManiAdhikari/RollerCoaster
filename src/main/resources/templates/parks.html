@@ -67,11 +67,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="park : ${parks}">
-                <td><a href="/erlebnispark" th:text="${park.name}"></a></td>
+            <tr th:each="park : ${allparks}">
+                <td><a th:href="@{/parks/{id}(id=${park.id})}" th:text="${park.name}"></a></td>
                 <td th:text="${park.adress}"></td>
-                <td><a th:href="@{/showparks}" class="btn btn-warning">Edit</a></td>
-                <td><a th:href="@{/showparks}" class="btn btn-danger">Dlt</a></td>
+                <td><a href="#" class="btn btn-warning">Edit</a></td>
+                <td><a href="#" class="btn btn-danger">Dlt</a></td>
             </tr>
             </tbody>
         </table>

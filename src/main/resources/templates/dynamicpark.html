@@ -47,7 +47,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
         <li class="breadcrumb-item"><a href="/showparks">Parks</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Erlebnis Park</li>
+        <li class="breadcrumb-item active" aria-current="page" th:text="${mypark.name}"></li>
     </ol>
 </nav>
 
@@ -55,7 +55,7 @@
 <div class="container my-5">
     <div class="row mb-4">
         <div class="col-sm-9">
-            <strong style="font-size: 2rem; font-family: 'Object Sans'">Erlebnis Park</strong>
+            <strong style="font-size: 2rem; font-family: 'Object Sans'" th:text="${mypark.name}"></strong>
         </div>
         <div class="col-sm-3">
             <a href="#" class="btn btn-primary float-right">Achterbahn für diesen Park erstellen</a>
