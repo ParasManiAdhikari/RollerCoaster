@@ -90,22 +90,21 @@ public class ParkController {
         return "redirect:/showparks";
     }
 
-    /**
-     * Dashboard string.
-     *
-     * @return the string
-     */
-    @GetMapping(value = "/dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
 
+    /**
+     * @autor Paras Adhikari
+     * to show list of all parks
+     */
     @GetMapping("/showparks")
     public String showParks(Model model){
         model.addAttribute("allparks", parkRepository.findAll());
         return "parks";
     }
 
+    /**
+     * @autor Paras Adhikari
+     * to show the clicked park
+     */
     @GetMapping("/parks/{id}")
     public String chosenPark(@PathVariable("id") long myid, Model model){
         Park chosenpark = parkRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid park Id:" + myid));

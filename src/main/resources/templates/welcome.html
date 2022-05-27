@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kontoansicht</title>
+    <title>Welcome Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap Link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
@@ -42,42 +41,52 @@
     </div>
 </nav>
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Deutschland</li>
-    </ol>
-</nav>
-
-<body>
-<div class="container my-5">
-    <strong style="font-size: 2rem; font-family: 'Object Sans'">Parks in Deutschland</strong>
+<body style="background-color: #cce5ff">
+<div class="container my-5" style="color: #004085">
+    <strong style="font-size: 2rem; font-family: 'Object Sans'">Welcome to TH-Park <stron th:text="${myuser.name}"></stron>! &#127906 🎡 🎠</strong>
+    <br>
     <hr>
-    <div class="row">
-        <div class="col">
-            <form action="#" th:action="@{/}"></form>
+</div>
+<div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                All rights reserved
+            </div>
+            <div class="col">
+                <p class="float-right">SWT2 Group MO815 Project</p>
+            </div>
         </div>
-        <table class="table table-striped table-responsive-md">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="park : ${allparks}">
-                <td><a th:href="@{/parks/{id}(id=${park.id})}" th:text="${park.name}"></a></td>
-                <td th:text="${park.adress}"></td>
-                <td><a href="#" class="btn btn-warning">Edit</a></td>
-                <td><a href="#" class="btn btn-danger">Dlt</a></td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </body>
-
 </html>
