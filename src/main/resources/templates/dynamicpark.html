@@ -64,14 +64,14 @@
     <hr>
     <dl class="row">
         <dt class="col-sm-3">Kurzbeschreibung:</dt>
-        <dd class="col-sm-9">Der ErlebnisPark in Sierksdorf ist der einzige Freizeitpark in Deutschland direkt am Meer. Im Erlebnispark an der Ostsee gibt es circa 125 Attraktionen zu entdecken. Von einigen Fahrgeschäften könnt ihr sogar auf das Meer blicken. </dd>
+        <dd class="col-sm-9">Der <simple th:text="${mypark.name}"></simple> in <si th:text="${mypark.adress}"></si> ist der einzige Freizeitpark in Deutschland direkt am Meer. Hier gibt es circa 125 Attraktionen zu entdecken. Von einigen Fahrgeschäften könnt ihr sogar auf das Meer blicken. </dd>
 
         <dt class="col-sm-3">Addresse:</dt>
         <dd class="col-sm-9">
-            <p>Am Fahrenkrog 1,</p>
-            <p>23730 Sierksdorf</p>
+            <p th:text="${mypark.adress}"></p>
         </dd>
 
+<!--     when achterbahnen are created they should be shown here as th:each-->
         <dt class="col-sm-3">Achterbahnen:</dt>
         <dd class="col-sm-9">
             <p><a href="/index">Karacho</a></p>
