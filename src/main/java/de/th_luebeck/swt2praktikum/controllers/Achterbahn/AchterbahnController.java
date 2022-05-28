@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -26,19 +25,18 @@ public class AchterbahnController {
         return "addachterbahn";
     }
 
-
     @PostMapping(value = "/addachterbahn")
-    public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
+    public String addAchterbahn(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/addachterbahn";
+            return "addachterbahn";
         }
-        else
-            return addAchterbahn(achterbahnInput);
+        Achterbahn achterbahn = new Achterbahn();
+        achterbahn.setName(achterbahnInput.getName());
+        achterbahnRepository.save(achterbahn);
+        return "redirect:/";
     }
-
-    public String addAchterbahn(@ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput) {
-        achterbahnRepository.save(new Achterbahn(achterbahnInput.getName();
-        return "redirect:/dashboard";
-    }
-
 }
+
+
+
+
