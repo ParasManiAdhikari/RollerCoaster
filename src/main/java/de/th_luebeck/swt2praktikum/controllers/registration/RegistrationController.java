@@ -82,6 +82,7 @@ public class RegistrationController {
         return "registration";
     }
 
+
     /**
      * Registration string.
      *

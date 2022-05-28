@@ -10,6 +10,8 @@ class Swt2praktikumApplicationTests {
 	void contextLoads() {
 	}
 
+
+
 }
 
 // de.th_luebeck.swt2praktikum.Swt2praktikumApplicationTests
