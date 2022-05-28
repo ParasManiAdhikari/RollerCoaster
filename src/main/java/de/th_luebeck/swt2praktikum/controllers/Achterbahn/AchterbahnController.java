@@ -21,7 +21,7 @@ public class AchterbahnController {
 
     /**
      * @autor Nitesh Bhattarai
-     * to show the clicked park
+     * to add achterbahn
      */
     @GetMapping(value = "/addachterbahn")
     public String addAchterbahn(Model model) {
