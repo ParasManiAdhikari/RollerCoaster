@@ -40,6 +40,12 @@ AbmeldenTest:
     - mvn -Dtest:AbmeldenTest test
 
 
+LoginTest:
+  stage: test
+  script:
+    - mvn -Dtest:LoginTest test
+
+
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
