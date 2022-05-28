@@ -1,10 +1,12 @@
 package de.th_luebeck.swt2praktikum.repositories;
 
 import de.th_luebeck.swt2praktikum.entities.Achterbahn;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AchterbahnRepository extends CrudRepository<Achterbahn, Long> {
+@Repository
+public interface AchterbahnRepository extends JpaRepository<Achterbahn, Long> {
+     Achterbahn findByName(String name);
 
-    Achterbahn findByName(String name);
-
+    void delete(Achterbahn achterbahn_delete);
 }

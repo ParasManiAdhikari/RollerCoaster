@@ -34,26 +34,20 @@
 
 <body>
 <div class="container my-5">
-    <h2 class="mb-5">Neue Achterbahn</h2>
+    <h2 class="mb-5">New Rollercoaster</h2>
     <div class="row">
         <div class="col-md-6">
-            <!--/*@thymesVar id="Achterbahn" type=""*/-->
-            <form th:action="@{/achterbahn}" th:object="${Achterbahn}" th:method="post">
+            <form th:action="@{/addachterbahn}" th:object="${achterbahnInput}" th:method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="parkName" class="col-form-label">Park Name</label>
-                        <input type="text" class="form-control" id="parkName" placeholder="Park Name" th:field="*{name}"
-                               minlength="8" required>
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" required>
+                        <my-alert th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></my-alert>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="Achterbahnname" class="col-form-label">Achterbahn Name</label>
-                        <input type="text" class="form-control" id="achterbahnName" placeholder="Achterbahn Name"
-                               th:field="*{name}" required>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Achterbahn Erstellen">
+                        <input type="submit" class="btn btn-primary"   value="Add Achterbahn">
+                        <my-alert th:text="${}"></my-alert>
                     </div>
                 </div>
             </form>

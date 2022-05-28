@@ -2,34 +2,46 @@ package de.th_luebeck.swt2praktikum.controllers.Achterbahn;
 
 import de.th_luebeck.swt2praktikum.entities.Achterbahn;
 import de.th_luebeck.swt2praktikum.repositories.AchterbahnRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+@Controller
 public class AchterbahnController {
 
-    private final AchterbahnRepository achterbahnRepository;
+    @Autowired
+    private AchterbahnRepository achterbahnRepository;
 
-    public AchterbahnController(AchterbahnRepository achterbahnRepository) {
-        this.achterbahnRepository = achterbahnRepository;
+
+    @GetMapping(value = "/addachterbahn")
+    public String addachterbahn(Model model) {
+        model.addAttribute("AchterbahnInput", new AchterbahnInput());
+        return "addachterbahn";
     }
 
-    @GetMapping("/achterbahn")
-    public String getAchterbahn(Model model) {
-        model.addAttribute("Achterbahn", achterbahnRepository.findAll());
-        return "achterbahn";
-    }
 
-    @PostMapping("/achterbahn/achterbahnErstellen")
-    public String achterbahnErstellen(@PathVariable("id") long id, @Valid Achterbahn achterbahn, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "achterbahn";
+    @PostMapping(value = "/addachterbahn")
+    public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "/addachterbahn";
         }
-        achterbahnRepository.save(achterbahn);
-        return "redirect:/achterbahn";
+        else
+            return addachterbahn(achterbahnInput);
     }
+
+    public String addachterbahn(@ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput) {
+        Achterbahn achterbahn = new Achterbahn();
+        achterbahn.setName(achterbahnInput.getName());
+        achterbahnRepository.save(achterbahn);
+        return "redirect:/dashboard";
+    }
+
+
 }
