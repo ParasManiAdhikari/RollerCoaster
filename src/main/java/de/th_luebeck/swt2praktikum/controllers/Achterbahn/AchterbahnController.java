@@ -21,7 +21,7 @@ public class AchterbahnController {
 
 
     @GetMapping(value = "/addachterbahn")
-    public String addachterbahn(Model model) {
+    public String addAchterbahn(Model model) {
         model.addAttribute("AchterbahnInput", new AchterbahnInput());
         return "addachterbahn";
     }
@@ -33,15 +33,12 @@ public class AchterbahnController {
             return "/addachterbahn";
         }
         else
-            return addachterbahn(achterbahnInput);
+            return addAchterbahn(achterbahnInput);
     }
 
-    public String addachterbahn(@ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput) {
-        Achterbahn achterbahn = new Achterbahn();
-        achterbahn.setName(achterbahnInput.getName());
-        achterbahnRepository.save(achterbahn);
+    public String addAchterbahn(@ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput) {
+        achterbahnRepository.save(new Achterbahn(achterbahnInput.getName();
         return "redirect:/dashboard";
     }
-
 
 }

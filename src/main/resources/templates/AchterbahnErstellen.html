@@ -37,17 +37,18 @@
     <h2 class="mb-5">New Rollercoaster</h2>
     <div class="row">
         <div class="col-md-6">
-            <form th:action="@{/addachterbahn}" th:object="${achterbahnInput}" th:method="post">
+            <form th:action="@{/addachterbahn}" th:object="${AchterbahnInput}" th:method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" required>
-                        <my-alert th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></my-alert>
+                        <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"
+                               required>
+                        <my-alert th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></my-alert>
                     </div>
-                <div class="row">
-                    <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary"   value="Add Achterbahn">
-                        <my-alert th:text="${}"></my-alert>
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <input type="submit" class="btn btn-primary" value="Add Achterbahn">
+                        </div>
                     </div>
                 </div>
             </form>
