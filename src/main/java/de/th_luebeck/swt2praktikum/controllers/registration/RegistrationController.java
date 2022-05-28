@@ -2,9 +2,6 @@ package de.th_luebeck.swt2praktikum.controllers.registration;
 
 import de.th_luebeck.swt2praktikum.entities.User;
 import de.th_luebeck.swt2praktikum.repositories.UserRepository;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -66,8 +62,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        registration(registrationInput);
-        return "redirect:/login";
+        return registration(registrationInput);
     }
 
     /**
@@ -89,7 +84,7 @@ public class RegistrationController {
      * @param registrationInput contains the user input from the html form
      * @return redirect to /login
      */
-    @PostMapping("/")
+
     public String registration(@ModelAttribute("registrationInput") RegistrationInput registrationInput) {
         userRepository.save(new User(registrationInput.getUserName(),
                 BCrypt.hashpw(registrationInput.getPassword(), BCrypt.gensalt()),

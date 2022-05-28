@@ -38,7 +38,10 @@ AbmeldenTest:
   stage: test
   script:
     - mvn -Dtest:AbmeldenTest test
-
+AddParkTest:
+  stage: test
+  script:
+    - mvn -Dtest:AddParkTest test
 
 LoginTest:
   stage: test
