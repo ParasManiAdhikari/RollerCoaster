@@ -22,7 +22,7 @@ public class AchterbahnController {
     @GetMapping(value = "/addachterbahn")
     public String addAchterbahn(Model model) {
         model.addAttribute("AchterbahnInput", new AchterbahnInput());
-        return "addachterbahn";
+        return "AchterbahnErstellen";
     }
 
     @PostMapping(value = "/addachterbahn")
@@ -33,7 +33,7 @@ public class AchterbahnController {
         Achterbahn achterbahn = new Achterbahn();
         achterbahn.setName(achterbahnInput.getName());
         achterbahnRepository.save(achterbahn);
-        return "redirect:/";
+        return "redirect:/parks";
     }
 }
 

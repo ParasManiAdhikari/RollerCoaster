@@ -29,7 +29,7 @@ class AbmeldenTest{
 
     @Test
     void logoutTest() {
-        User user = new User("Parasad1", "mypass", "parasad612@gmail.com", "Paras Adhikari");
+        User user = new User("Parasad1", "mypass", "parasad612@gmail.com", "P1^2aras Adhikari");
 
         when(mockedBindingResult.hasErrors()).thenReturn(false);
 
