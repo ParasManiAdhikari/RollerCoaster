@@ -35,7 +35,7 @@ public class AchterbahnController {
             return "addachterbahn";
         } else
             return addAchterbahn(achterbahnInput);
-        return "redirect:/addachterbahn";
+        return "AchterbahnErstellen";
     }
 
     public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
