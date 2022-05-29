@@ -1,10 +1,7 @@
 package de.th_luebeck.swt2praktikum.entities;
 
 
-import lombok.Data;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -34,7 +31,7 @@ public class User {
     @Column(name = "password",nullable = false)
     private String password;
 
-    public User() {}
+    public Integer fahrten;
 
     /**
      * Constructor with parameters for quick-instantiation
@@ -48,9 +45,9 @@ public class User {
         this.email = email;
         this.userName = userName;
         this.password = password;
+
+        this.fahrten = 0;
     }
-
-
 
 
     @Override
