@@ -47,6 +47,11 @@ AddParkTest:
   script:
     - mvn -Dtest:AddParkTest test
 
+AchterbahnTest:
+  stage: test
+  script:
+    - mvn -Dtest:AchterbahnTest test
+    -
 LoginTest:
   stage: test
   script:
