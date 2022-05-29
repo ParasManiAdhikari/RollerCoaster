@@ -35,13 +35,7 @@ public class User {
 
     public Integer fahrten;
 
-    /**
-     * Constructor with parameters for quick-instantiation
-     * @param name the user's name
-     * @param userName the user's username
-     * @param password the user's password
-     * @param email the user's email
-     */
+    public boolean isLoggedin;
 
     public User(){}
 

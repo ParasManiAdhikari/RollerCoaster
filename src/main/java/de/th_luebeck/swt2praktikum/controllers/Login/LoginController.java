@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
     @Autowired
     private UserRepository userRepository;
+    public User loggedUser;
 
     /**
      * @param model connection to user input class
@@ -48,6 +49,8 @@ public class LoginController {
     @PostMapping(value = "/login", params = "submit")
     public String login(@ModelAttribute("loginInput")LoginInput loginInput, Model model, HttpServletRequest request) {
         final User userFound = userRepository.findByUserName(loginInput.getUserName());
+        this.loggedUser = userFound;
+        loggedUser.isLoggedin = true;
         final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = "redirect:/dashboard";
         if (userFound == null || !encoder.matches(loginInput.getUserPassword(), userFound.getPassword())) {
@@ -60,9 +63,7 @@ public class LoginController {
         }
         System.out.println(userFound);
             return "login";
-
     }
-
 
     /**
      * @autor Paras Adhikari
@@ -74,6 +75,21 @@ public class LoginController {
         model.addAttribute("myuser", user);
         return "welcome";
     }
+
+    @ModelAttribute("loggeduser")
+    public User user(){
+        return loggedUser;
+    }
+
+    /**
+     * @autor Paras Adhikari
+     * to show the account info
+     */
+    @GetMapping("/kontoansicht")
+    public String getUserDetails() {
+        return "kontoansicht";
+    }
+
     /**
      * A method to redirect the user to the registration.html
      * @return registration page
@@ -85,17 +101,18 @@ public class LoginController {
 
     // comment out to use h2 database, other times comment in for logout to work.
 
-//    @PostMapping(value = "/logout", params = "submit")
-//    public String doLogout(){
-//        return "login";
-//    }
-//
-//    @Configuration
-//    @EnableWebSecurity
-//    public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
-//        @Override
-//        protected void configure(final HttpSecurity http) throws Exception {
-//            http.logout();
-//        }
-//    }
+    @PostMapping(value = "/logout", params = "submit")
+    public String doLogout(){
+        loggedUser.isLoggedin = false;
+        return "login";
+    }
+
+    @Configuration
+    @EnableWebSecurity
+    public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
+        @Override
+        protected void configure(final HttpSecurity http) throws Exception {
+            http.logout();
+        }
+    }
 }

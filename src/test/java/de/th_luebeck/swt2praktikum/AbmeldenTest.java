@@ -1,5 +1,6 @@
 package de.th_luebeck.swt2praktikum;
 
+import de.th_luebeck.swt2praktikum.controllers.Login.LoginInput;
 import de.th_luebeck.swt2praktikum.controllers.UserController;
 import de.th_luebeck.swt2praktikum.entities.User;
 import de.th_luebeck.swt2praktikum.repositories.UserRepository;
@@ -29,11 +30,14 @@ class AbmeldenTest{
 
     @Test
     void logoutTest() {
+        LoginInput loginInput = new LoginInput("parasad1", "612#Paras");
         User user = new User("Parasad1", "mypass", "parasad612@gmail.com", "P1^2aras Adhikari");
 
         when(mockedBindingResult.hasErrors()).thenReturn(false);
 
         assertThat(userController.logout2(user, mockedBindingResult, mockedModel)).isEqualTo("redirect:/login");
+
+
     }
 
 

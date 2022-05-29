@@ -39,6 +39,10 @@ public class AchterbahnController {
         return "addachterbahn";
     }
 
+    /**
+     * @autor Nitesh Bhattarai
+     * to add achterbahn
+     */
     @PostMapping(value = "/addachterbahn")
     public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
         if (achterbahnRepository.findByName(achterbahnInput.getName()) != null) {
@@ -51,17 +55,29 @@ public class AchterbahnController {
         return "redirect:/addachterbahn";
     }
 
+    /**
+     * @autor Nitesh Bhattarai
+     * to add achterbahn
+     */
     public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
         achterbahnRepository.save(new Achterbahn(Achterbahninput.getName()));
         return "redirect:/allAchterbahns";
     }
 
+    /**
+     * @autor Nitesh Bhattarai
+     * to add achterbahn
+     */
     @GetMapping(value = "/deleteachterbahn/{id}")
     public String deleteAchterbahn(@PathVariable("id") Long id) {
         achterbahnRepository.deleteById(id);
         return "AchterbahnAnzeigen";
     }
 
+    /**
+     * @autor Ammar
+     * to add achterbahn
+     */
     @GetMapping("/allAchterbahns")
     public String getAllAchterbahns(Model model){
         achterbahns = achterbahnRepository.findAll();
@@ -71,6 +87,10 @@ public class AchterbahnController {
         return "AchterbahnAnzeigen";
     }
 
+    /**
+     * @autor Ammar
+     * to add achterbahn
+     */
     @GetMapping("/Achterbahndetails/{id}")
     public String Achterbahndeteils(@PathVariable("id") long id, Model model){
         Long _id = achterbahns.get((int) (id-1)).getId();
@@ -80,6 +100,10 @@ public class AchterbahnController {
         return "AchterbahnDeteil";
     }
 
+    /**
+     * @autor Ammar
+     * to add achterbahn
+     */
     @PostMapping(value = "/searchbahn")
     public String searchBahnByName(@ModelAttribute("achterbahn") Achterbahn achterbahn, Model model) {
         List<Achterbahn> _achterbahns = new LinkedList<>();
@@ -93,6 +117,10 @@ public class AchterbahnController {
 
     }
 
+    /**
+     * @autor Ammar
+     * to add achterbahn
+     */
     @GetMapping("/GetRandomAchterbahn")
     public String getRandomAchterbahn(Model model){
         Random rng = new Random();
