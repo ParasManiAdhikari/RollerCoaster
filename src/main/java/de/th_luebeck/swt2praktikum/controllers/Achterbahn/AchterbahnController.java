@@ -8,9 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller
 public class AchterbahnController {
@@ -18,6 +23,11 @@ public class AchterbahnController {
     @Autowired
     private AchterbahnRepository achterbahnRepository;
 
+    List<Achterbahn> achterbahns;
+
+    public AchterbahnController(AchterbahnRepository mockedAchterbahnRepo){
+        this.achterbahnRepository = mockedAchterbahnRepo;
+    }
 
     /**
      * @autor Nitesh Bhattarai
@@ -37,7 +47,52 @@ public class AchterbahnController {
         Achterbahn achterbahn = new Achterbahn();
         achterbahn.setName(achterbahnInput.getName());
         achterbahnRepository.save(achterbahn);
-        return "redirect:/index";
+        return "redirect:/allAchterbahns";
+    }
+
+    @GetMapping("/allAchterbahns")
+    public String getAllAchterbahns(Model model){
+        achterbahns = achterbahnRepository.findAll();
+        model.addAttribute("achterbahns", achterbahns);
+        model.addAttribute("achterbahn", new Achterbahn());
+
+        return "AchterbahnAnzeigen";
+    }
+
+//    @GetMapping("/Achterbahndetails/{id}")
+//    public String Achterbahndeteils(@PathVariable("id") long id, Model model){
+//        Long _id = achterbahns.get((int) (id-1)).getId();
+//        String _name = achterbahns.get((int) (id-1)).getName();
+//        model.addAttribute("id", _id);
+//        model.addAttribute("name", _name);
+//        return "AchterbahnDeteil";
+//    }
+
+    @PostMapping(value = "/searchbahn")
+    public String searchBahnByName(@ModelAttribute("achterbahn") Achterbahn achterbahn, Model model) {
+        List<Achterbahn> _achterbahns = new LinkedList<>();
+        if(achterbahns.size() > 0)
+            _achterbahns = achterbahns.stream().filter(a -> a.getName().toLowerCase().
+                    contains(achterbahn.getName().toLowerCase())
+            ).collect(Collectors.toList());
+        model.addAttribute("achterbahns", _achterbahns);
+
+        return "AchterbahnAnzeigen";
+
+    }
+
+    @GetMapping("/GetRandomAchterbahn")
+    public String getRandomAchterbahn(Model model){
+        Random rng = new Random();
+        int min = 0;
+        int max = achterbahns.size() - 1;
+        int upperBound = max - min + 1;
+        int randomId = min + rng.nextInt(upperBound);
+        Long _id = achterbahns.get(randomId).getId();
+        String _name = achterbahns.get(randomId).getName();
+        model.addAttribute("id", _id);
+        model.addAttribute("name", _name);
+        return "AchterbahnDeteil";
     }
 }
 

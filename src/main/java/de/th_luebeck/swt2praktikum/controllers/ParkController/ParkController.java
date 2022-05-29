@@ -31,6 +31,11 @@ public class ParkController {
 
     List<Park> parks;
 
+    public ParkController(ParkRepository mockedParkRepository) {
+        this.parkRepository = mockedParkRepository;
+    }
+
+
     /**
      * Add park string.
      * @autor Baraa Hejazi
@@ -114,7 +119,7 @@ public class ParkController {
      * return searched Park.
      */
     @PostMapping(value = "/search")
-    public String searchCarByName(@ModelAttribute("mypark") Park mypark, Model model) {
+    public String searchParkByName(@ModelAttribute("mypark") Park mypark, Model model) {
         List<Park> _parks = new LinkedList<>();
         if(parks.size() > 0)
             _parks = parks.stream().filter(a -> a.getName().toLowerCase().
