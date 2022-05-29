@@ -40,14 +40,26 @@ public class AchterbahnController {
     }
 
     @PostMapping(value = "/addachterbahn")
-    public String addAchterbahn(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+    public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
+        if (achterbahnRepository.findByName(achterbahnInput.getName()) != null) {
+            model.addAttribute("error", "Achterbahn mit diesem Namen existiert bereits");
+        } else if (bindingResult.hasErrors()) {
+            model.addAttribute("checkallInput", "Bitte alle Felder ausfüllen!");
             return "addachterbahn";
-        }
-        Achterbahn achterbahn = new Achterbahn();
-        achterbahn.setName(achterbahnInput.getName());
-        achterbahnRepository.save(achterbahn);
+        } else
+            return addAchterbahn(achterbahnInput);
+        return "redirect:/addachterbahn";
+    }
+
+    public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
+        achterbahnRepository.save(new Achterbahn(Achterbahninput.getName()));
         return "redirect:/allAchterbahns";
+    }
+
+    @GetMapping(value = "/deleteachterbahn/{id}")
+    public String deleteAchterbahn(@PathVariable("id") Long id) {
+        achterbahnRepository.deleteById(id);
+        return "AchterbahnAnzeigen";
     }
 
     @GetMapping("/allAchterbahns")
@@ -59,14 +71,14 @@ public class AchterbahnController {
         return "AchterbahnAnzeigen";
     }
 
-//    @GetMapping("/Achterbahndetails/{id}")
-//    public String Achterbahndeteils(@PathVariable("id") long id, Model model){
-//        Long _id = achterbahns.get((int) (id-1)).getId();
-//        String _name = achterbahns.get((int) (id-1)).getName();
-//        model.addAttribute("id", _id);
-//        model.addAttribute("name", _name);
-//        return "AchterbahnDeteil";
-//    }
+    @GetMapping("/Achterbahndetails/{id}")
+    public String Achterbahndeteils(@PathVariable("id") long id, Model model){
+        Long _id = achterbahns.get((int) (id-1)).getId();
+        String _name = achterbahns.get((int) (id-1)).getName();
+        model.addAttribute("id", _id);
+        model.addAttribute("name", _name);
+        return "AchterbahnDeteil";
+    }
 
     @PostMapping(value = "/searchbahn")
     public String searchBahnByName(@ModelAttribute("achterbahn") Achterbahn achterbahn, Model model) {
