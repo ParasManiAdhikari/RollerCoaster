@@ -5,23 +5,22 @@ import de.th_luebeck.swt2praktikum.controllers.Achterbahn.AchterbahnInput;
 import de.th_luebeck.swt2praktikum.entities.Achterbahn;
 import de.th_luebeck.swt2praktikum.repositories.AchterbahnRepository;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestBindingException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @AutoConfigureMockMvc
 @SpringBootTest
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class AchterbahnTest {
-
 
     @Autowired
     private AchterbahnController achterbahnController;
@@ -42,4 +41,5 @@ class AchterbahnTest {
         assertNotNull(savedAchterbahn);
         assertEquals(achterbahnInput.getName(), savedAchterbahn.getName());
     }
+
 }
