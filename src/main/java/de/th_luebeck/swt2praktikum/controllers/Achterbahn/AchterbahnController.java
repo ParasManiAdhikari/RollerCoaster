@@ -28,12 +28,14 @@ public class AchterbahnController {
 
     @PostMapping(value = "/addachterbahn")
     public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        if (achterbahnRepository.findByName(achterbahnInput.getName()) != null) {
+            model.addAttribute("error", "Achterbahn mit diesem Namen existiert bereits");
+        } else if (bindingResult.hasErrors()) {
             model.addAttribute("checkallInput", "Bitte alle Felder ausfüllen!");
             return "addachterbahn";
-        }
-        else
+        } else
             return addAchterbahn(achterbahnInput);
+        return "redirect:/addachterbahn";
     }
 
     public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
