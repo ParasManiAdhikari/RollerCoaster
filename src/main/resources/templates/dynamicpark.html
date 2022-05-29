@@ -75,15 +75,9 @@
 <!--     when achterbahnen are created they should be shown here as th:each-->
         <dt class="col-sm-3">Achterbahnen:</dt>
         <dd class="col-sm-9">
-
-            <tr th:each="user :{user}">
-
-                <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Karacho</a></p>
-                <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Volldampf</a></p>
-                <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Mammut</a></p>
-
-            </tr>
-
+            <p><a href="/index">Karacho</a></p>
+            <p><a href="/index">Volldampf</a></p>
+            <p><a href="/index">Mammut</a></p>
         </dd>
     </dl>
 </div>
