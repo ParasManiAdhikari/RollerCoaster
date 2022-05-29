@@ -1,19 +1,17 @@
 package de.th_luebeck.swt2praktikum;
 
 import de.th_luebeck.swt2praktikum.controllers.UserController;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-
 import de.th_luebeck.swt2praktikum.controllers.registration.RegistrationInput;
 import de.th_luebeck.swt2praktikum.entities.User;
 import de.th_luebeck.swt2praktikum.repositories.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,26 +19,27 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@AutoConfigureMockMvc
 @SpringBootTest
-public class DeleteUserTest {
+class AddFahrtTest{
 
     @Autowired
     private UserController controller;
-
-    @Test
-    public void contextLoads() throws Exception {
-        //   assertThat(controller).isNotNull(); asd
-    }
     @Autowired
     private UserRepository userRepository;
 
-    @Test
-    public void DeleteUserTest(){
+    private static Model mockedModel;
 
-        List<User> users = new ArrayList<>();
-        users = (List<User>) userRepository.findAll(); // Sie können diese Zeile löschen
+    @BeforeEach
+    public void setUpUserControllerInstance() {
+        mockedModel = mock(Model.class);
+    }
+
+    @Test
+    void addFahrtTest() {
 
         RegistrationInput registrationInput = new RegistrationInput("salemSalem2","ahmedahmed2", "MyPassword12$", "MyPassword12$", "myEmail2@gmail.com", false);
 
@@ -50,18 +49,10 @@ public class DeleteUserTest {
 
         User _user = userRepository.save(user);
 
-        users = (List<User>) userRepository.findAll(); // Sie können diese Zeile löschen
+        assertEquals(_user.getFahrten(), 0);
 
-//        assertThat(_user.getUserName()).isSameAs(registrationInput.getUserName());
+        controller.addFahrt(_user.getId(), mockedModel);
 
-        userRepository.delete(_user);
-
-        users = (List<User>) userRepository.findAll(); // Sie können diese Zeile löschen
-
-        Optional<User> u = userRepository.findById(_user.getId());
-
-        assertEquals(u.toString(), "Optional.empty");
-
+        assertEquals(_user.getFahrten(), 1);
     }
-
 }

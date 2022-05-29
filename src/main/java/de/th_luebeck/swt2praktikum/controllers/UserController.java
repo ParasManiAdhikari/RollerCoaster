@@ -45,4 +45,19 @@ public class UserController {
         model.addAttribute("user", user);
         return "kontoansicht";
     }
+
+    @GetMapping("/dynamicpark/{id}")
+    public String addFahrt(@PathVariable("id") long id, Model model) {
+
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("user", user);
+
+        user.fahrten = user.fahrten + 1;
+
+        model.addAttribute("user", user);
+
+        System.out.println("added Fahrt");
+        return "redirect:/index";
+    }
+
 }

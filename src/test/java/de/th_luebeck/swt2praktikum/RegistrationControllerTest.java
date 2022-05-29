@@ -27,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class RegistrationControllerTest {
 
-
     @Autowired
     private RegistrationController registrationController;
 

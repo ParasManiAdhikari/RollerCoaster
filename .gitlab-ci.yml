@@ -33,6 +33,10 @@ DeleteUserTest:
   script:
     - mvn -Dtest:DeleteUserTest test
 
+AddFahrtTest:
+  stage: test
+  script:
+    - mvn -Dtest:AddFahrtTest test
 
 AbmeldenTest:
   stage: test

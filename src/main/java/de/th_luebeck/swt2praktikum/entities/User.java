@@ -1,10 +1,9 @@
 package de.th_luebeck.swt2praktikum.entities;
 
 
-import lombok.Data;
+import org.springframework.ui.Model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -34,7 +33,7 @@ public class User {
     @Column(name = "password",nullable = false)
     private String password;
 
-    public User() {}
+    public Integer fahrten;
 
     /**
      * Constructor with parameters for quick-instantiation
@@ -43,15 +42,17 @@ public class User {
      * @param password the user's password
      * @param email the user's email
      */
+
+    public User(){}
+
     public User( String userName, String password, String email,String name) {
         this.name = name;
         this.email = email;
         this.userName = userName;
         this.password = password;
+
+        this.fahrten = 0;
     }
-
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -110,4 +111,5 @@ public class User {
         return email;
     }
 
+    public Integer getFahrten() {return fahrten;}
 }
