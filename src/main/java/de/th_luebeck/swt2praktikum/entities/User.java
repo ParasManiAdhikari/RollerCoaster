@@ -1,6 +1,8 @@
 package de.th_luebeck.swt2praktikum.entities;
 
 
+import org.springframework.ui.Model;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -40,6 +42,9 @@ public class User {
      * @param password the user's password
      * @param email the user's email
      */
+
+    public User(){}
+
     public User( String userName, String password, String email,String name) {
         this.name = name;
         this.email = email;
@@ -107,5 +112,4 @@ public class User {
     }
 
     public Integer getFahrten() {return fahrten;}
-
 }

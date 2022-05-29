@@ -53,6 +53,9 @@ public class UserController {
         model.addAttribute("user", user);
 
         user.fahrten = user.fahrten + 1;
+
+        model.addAttribute("user", user);
+
         System.out.println("added Fahrt");
         return "redirect:/index";
     }
