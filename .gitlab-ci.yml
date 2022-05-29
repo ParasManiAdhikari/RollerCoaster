@@ -51,7 +51,8 @@ AchterbahnTest:
   stage: test
   script:
     - mvn -Dtest:AchterbahnTest test
-    -
+
+    
 LoginTest:
   stage: test
   script:
