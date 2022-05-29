@@ -26,16 +26,29 @@ public class AchterbahnController {
     }
 
     @PostMapping(value = "/addachterbahn")
-    public String addAchterbahn(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult) {
+    public String addAchterbahnCheck(@Valid @ModelAttribute("AchterbahnInput") AchterbahnInput achterbahnInput, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("checkallInput", "Bitte alle Felder ausfüllen!");
             return "addachterbahn";
         }
-        Achterbahn achterbahn = new Achterbahn();
-        achterbahn.setName(achterbahnInput.getName());
-        achterbahnRepository.save(achterbahn);
-        return "redirect:/parks";
+        else
+            return addAchterbahn(achterbahnInput);
+    }
+
+    public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
+        achterbahnRepository.save(new Achterbahn(Achterbahninput.getName()));
+        return "/index";
+    }
+
+
+    @PostMapping(value = "/deleteachterbahn")
+    public String deleteAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
+        achterbahnRepository.delete(new Achterbahn(Achterbahninput.getName()));
+        return "/index";
     }
 }
+
+
 
 
 
