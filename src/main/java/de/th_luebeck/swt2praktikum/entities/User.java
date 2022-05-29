@@ -49,7 +49,6 @@ public class User {
         this.fahrten = 0;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,5 +105,7 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    public Integer getFahrten() {return fahrten;}
 
 }
