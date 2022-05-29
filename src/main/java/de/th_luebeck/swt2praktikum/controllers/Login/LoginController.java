@@ -50,7 +50,6 @@ public class LoginController {
     public String login(@ModelAttribute("loginInput")LoginInput loginInput, Model model, HttpServletRequest request) {
         final User userFound = userRepository.findByUserName(loginInput.getUserName());
         this.loggedUser = userFound;
-        loggedUser.isLoggedin = true;
         final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String result = "redirect:/dashboard";
         if (userFound == null || !encoder.matches(loginInput.getUserPassword(), userFound.getPassword())) {
@@ -103,7 +102,6 @@ public class LoginController {
 
     @PostMapping(value = "/logout", params = "submit")
     public String doLogout(){
-        loggedUser.isLoggedin = false;
         return "login";
     }
 

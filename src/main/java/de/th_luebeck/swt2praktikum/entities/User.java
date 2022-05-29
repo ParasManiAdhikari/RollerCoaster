@@ -35,8 +35,6 @@ public class User {
 
     public Integer fahrten;
 
-    public boolean isLoggedin;
-
     public User(){}
 
     public User( String userName, String password, String email,String name) {
