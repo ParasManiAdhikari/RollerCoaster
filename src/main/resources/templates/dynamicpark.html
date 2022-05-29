@@ -76,10 +76,13 @@
         <dt class="col-sm-3">Achterbahnen:</dt>
         <dd class="col-sm-9">
 
+            <tr th:each="user :{user}">
 
                 <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Karacho</a></p>
                 <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Volldampf</a></p>
                 <p><a th:href="@{/addFahrt/{id}(id=${user.id})}">Mammut</a></p>
+
+            </tr>
 
         </dd>
     </dl>
