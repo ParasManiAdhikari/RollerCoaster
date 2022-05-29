@@ -48,6 +48,10 @@ LoginTest:
   script:
     - mvn -Dtest:LoginTest test
 
+ParkAnzeigenTest:
+  stage: test
+  script:
+    - mvn -Dtest:ParkControllerTest test
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.

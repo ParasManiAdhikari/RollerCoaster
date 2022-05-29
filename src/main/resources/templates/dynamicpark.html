@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Kontoansicht</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap Link -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
-    <a class="navbar-brand" href="#">TH Park</a>
+    <a class="navbar-brand" href="/index">TH Park</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
         <ul class="navbar-nav mr-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +34,6 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/addpark">Park erstellen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/allAchterbahns">Achterbahnen Anzeigen</a></li>
                 </ul>
             </div>
         </ul>
@@ -42,49 +44,42 @@
     </div>
 </nav>
 
-<body style="background-color: #cce5ff">
-<div class="container my-5" style="color: #004085">
-    <strong style="font-size: 2rem; font-family: 'Object Sans'">Welcome to TH-Park! &#127906 🎡 🎠</strong>
-    <br>
-    <hr>
-    <p>You are logged in!</p>
-</div>
-<div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                All rights reserved
-            </div>
-            <div class="col">
-                <p class="float-right">SWT2 Group MO815 Project</p>
-            </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
+        <li class="breadcrumb-item"><a href="/showparks">Deutschland</a></li>
+        <li class="breadcrumb-item active" aria-current="page" th:text="${mypark.name}"></li>
+    </ol>
+</nav>
+
+<body>
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-sm-9">
+            <strong style="font-size: 2rem; font-family: 'Object Sans'" th:text="${mypark.name}"></strong>
+        </div>
+        <div class="col-sm-3">
+            <a href="/addachterbahn" class="btn btn-primary float-right">Achterbahn erstellen</a>
         </div>
     </div>
+    <hr>
+    <dl class="row">
+        <dt class="col-sm-3">Kurzbeschreibung:</dt>
+        <dd class="col-sm-9">Der <simple th:text="${mypark.name}"></simple> in <si th:text="${mypark.adress}"></si> ist der einzige Freizeitpark in Deutschland direkt am Meer. Hier gibt es circa 125 Attraktionen zu entdecken. Von einigen Fahrgeschäften könnt ihr sogar auf das Meer blicken. </dd>
+
+        <dt class="col-sm-3">Addresse:</dt>
+        <dd class="col-sm-9">
+            <p th:text="${mypark.adress}"></p>
+        </dd>
+
+<!--     when achterbahnen are created they should be shown here as th:each-->
+        <dt class="col-sm-3">Achterbahnen:</dt>
+        <dd class="col-sm-9">
+            <p><a href="/index">Karacho</a></p>
+            <p><a href="/index">Volldampf</a></p>
+            <p><a href="/index">Mammut</a></p>
+        </dd>
+    </dl>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

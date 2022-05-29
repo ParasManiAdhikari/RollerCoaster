@@ -33,7 +33,7 @@ class AbmeldenTest{
 
         when(mockedBindingResult.hasErrors()).thenReturn(false);
 
-        assertThat(userController.logout(user, mockedBindingResult, mockedModel)).isEqualTo("redirect:/index");
+        assertThat(userController.logout2(user, mockedBindingResult, mockedModel)).isEqualTo("redirect:/login");
     }
 
 

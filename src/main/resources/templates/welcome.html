@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Welcome Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap Link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
-    <a class="navbar-brand" href="#">TH Park</a>
+    <a class="navbar-brand" href="/index">TH Park</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
         <ul class="navbar-nav mr-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,10 +44,10 @@
 
 <body style="background-color: #cce5ff">
 <div class="container my-5" style="color: #004085">
-    <strong style="font-size: 2rem; font-family: 'Object Sans'">Welcome to TH-Park! &#127906 🎡 🎠</strong>
+    <strong style="font-size: 2rem; font-family: 'Object Sans'">Welcome to TH-Park <stron th:text="${myuser.name}"></stron>! &#127906 🎡 🎠</strong>
     <br>
     <hr>
-    <p>You are logged in!</p>
+    <p>.</p>
 </div>
 <div>
     <br>

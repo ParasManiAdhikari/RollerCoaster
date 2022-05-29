@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>addpark</title>
+    <title>Addachterbahn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap Link; Replace later with css link-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -42,54 +42,25 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Park erstellen</li>
+        <li class="breadcrumb-item"><a href="/parks">Parks Anzeigen</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Achterbahn erstellen</li>
     </ol>
 </nav>
 <body>
 <div class="container my-5">
-    <strong style="font-size: 2rem; font-family: 'Object Sans'">Neuen Park erstellen</strong>
+    <strong style="font-size: 2rem; font-family: 'Object Sans'">Neuen Achterbahn erstellen</strong>
     <div class="row">
         <div class="col-md-6">
-            <form th:action="@{/addpark}" th:object="${Parkinput}" th:method="post">
+            <form th:action="@{/addachterbahn}" th:object="${AchterbahnInput}" th:method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Name</label>
                         <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" required>
                         <my-alert th:if="${#fields.hasErrors('name')}" th:errors="*{name}" ></my-alert>
-                        <my-alert th:text="${checkallInput}"></my-alert>
-                        <my-alert th:text="${notAvailablename}"></my-alert>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <label for="email" class="col-form-label">Email-Adresse</label>
-                        <input type="text" class="form-control" id="email" placeholder="Email-Adresse" th:field="*{emailadress}" required>
-                        <my-alert th:if="${#fields.hasErrors('emailadress')}" th:errors="*{emailadress}" ></my-alert>
-                        <my-alert th:text="${checkallInput}"></my-alert>
-                        <my-alert th:text="${notAvailableEmail}"></my-alert>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="adress" class="col-form-label">Adresse</label>
-                        <input type="text" class="form-control" id="adress" placeholder="Adresse" th:field="*{adresse}" required>
-                        <my-alert th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}"></my-alert>
-                        <my-alert th:text="${checkallInput}"></my-alert>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="telefon" class="col-form-label">Telefonnummer</label>
-                        <input type="text" class="form-control" id="telefon" placeholder="Telefonnummer" th:field="*{telefonnummer}" required>
-                        <my-alert th:if="${#fields.hasErrors('telefonnummer')}" th:errors="*{telefonnummer}"></my-alert>
-                        <my-alert th:text="${checkallInput}"></my-alert>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="fax" class="col-form-label">Faxnummer</label>
-                        <input type="text" class="form-control" id="fax" placeholder="Faxnummer" th:field="*{faxnummer}" required>
-                        <my-alert th:if="${#fields.hasErrors('faxnummer')}" th:errors="*{faxnummer}"></my-alert>
-                        <my-alert th:text="${checkallInput}"></my-alert>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary"   value="Add Park">
-                        <my-alert th:text="${checkallInput}"></my-alert>
+                        <input type="submit" class="btn btn-primary"   value="Add Achterbahn">
                     </div>
                 </div>
             </form>

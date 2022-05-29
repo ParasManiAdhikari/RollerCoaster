@@ -1,6 +1,7 @@
 package de.th_luebeck.swt2praktikum.controllers.ParkController;
 
 
+import de.th_luebeck.swt2praktikum.entities.Achterbahn;
 import de.th_luebeck.swt2praktikum.entities.Park;
 import de.th_luebeck.swt2praktikum.repositories.ParkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @autor Baraa Hejazi
@@ -23,6 +28,13 @@ public class ParkController {
 
     @Autowired
     private ParkRepository parkRepository;
+
+    List<Park> parks;
+
+    public ParkController(ParkRepository mockedParkRepository) {
+        this.parkRepository = mockedParkRepository;
+    }
+
 
     /**
      * Add park string.
@@ -86,16 +98,49 @@ public class ParkController {
         parkRepository.save(new Park(Parkinput.getName(),
                         Parkinput.getEmailadress(), Parkinput.getAdresse(),
                 Parkinput.getFaxnummer(),Parkinput.getTelefonnummer()));
-        return "redirect:/dashboard";
+        return "redirect:/showparks";
+    }
+
+
+    /**
+     * @autor Paras Adhikari
+     * to show list of all parks
+     */
+    @GetMapping("/showparks")
+    public String showParks(Model model){
+        parks = parkRepository.findAll();
+        model.addAttribute("allparks", parks);
+        model.addAttribute("mypark", new Park());
+        return "parks";
     }
 
     /**
-     * Dashboard string.
-     *
-     * @return the string
+     * @autor Paras Adhikari
+     * return searched Park.
      */
-    @GetMapping(value = "/dashboard")
-    public String dashboard() {
-        return "dashboard";
+    @PostMapping(value = "/search")
+    public String searchParkByName(@ModelAttribute("mypark") Park mypark, Model model) {
+        List<Park> _parks = new LinkedList<>();
+        if(parks.size() > 0)
+            _parks = parks.stream().filter(a -> a.getName().toLowerCase().
+                    contains(mypark.getName().toLowerCase())
+            ).collect(Collectors.toList());
+        model.addAttribute("allparks", _parks);
+
+        return "parks";
+
     }
+
+    /**
+     * @autor Paras Adhikari
+     * to show the clicked park
+     */
+    @GetMapping("/parks/{id}")
+    public String chosenPark(@PathVariable("id") long myid, Model model){
+        Park chosenpark = parkRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid park Id:" + myid));
+        model.addAttribute("mypark", chosenpark);
+        return "dynamicpark";
+    }
+
+
 }
