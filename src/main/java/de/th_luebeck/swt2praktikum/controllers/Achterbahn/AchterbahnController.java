@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
+
+
+
 
 @Controller
 public class AchterbahnController {
@@ -48,30 +52,13 @@ public class AchterbahnController {
 
 
 
-      /**  this.achterbahns = new LinkedList<Achterbahn>();
-
-        Achterbahn achterbahn = new Achterbahn("Berlin Achterbahn");
-        achterbahn.setId(1);
-        this.achterbahns.add(achterbahn);
-
-        achterbahn = new Achterbahn("Luebeck Achterbahn");
-        achterbahn.setId(2);
-        this.achterbahns.add(achterbahn);
-
-        achterbahn = new Achterbahn("Darmstat Achterbahn");
-        achterbahn.setId(3);
-        this.achterbahns.add(achterbahn);
-
-        achterbahn = new Achterbahn("Dusseldorf Achterbahn");
-        achterbahn.setId(4);
-        this.achterbahns.add(achterbahn);
-
-        achterbahn = new Achterbahn("Hessen Achterbahn");
-        achterbahn.setId(5);
-        this.achterbahns.add(achterbahn);
-       */
     }
 
+
+    /**
+     * @author Mohamed Ammar Naddaf
+     *
+     *
     /**
      * return list of Achterbahn.
      *
@@ -123,7 +110,25 @@ public class AchterbahnController {
 
     }
 
-
+    /**
+     * return zufällig Achterbahn.
+     *
+     * @param model for linking a class which contains the achterbahn output
+     * @return name of .html file
+     */
+    @GetMapping("/GetRandomAchterbahn")
+    public String getRandomAchterbahn(Model model){
+        Random rng = new Random();
+        int min = 0;
+        int max = achterbahns.size() - 1;
+        int upperBound = max - min + 1;
+        int randomId = min + rng.nextInt(upperBound);
+        Long _id = achterbahns.get(randomId).getId();
+        String _name = achterbahns.get(randomId).getName();
+        model.addAttribute("id", _id);
+        model.addAttribute("name", _name);
+        return "Achterbahndeteil";
+    }
 
 
 
