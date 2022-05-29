@@ -51,12 +51,28 @@
 
 <body>
 <div class="container my-5">
-  <strong style="font-size: 2rem; font-family: 'Object Sans'">Parks in Deutschland</strong>
-  <hr>
   <div class="row">
-    <div class="col">
-      <form action="#" th:action="@{/}"></form>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <strong style="font-size: 2rem; font-family: 'Object Sans'">Parks in Deutschland</strong>
+        </div>
+        <div class="col">
+          <form th:action="@{/search}" th:object="${mypark}"
+                method="post">
+            <div class="col-md-10 float-right">
+              <div class="form-group">
+                <input class="form-control"
+                       placeholder="Search by Name ..."
+                       type="search"
+                       th:field="*{name}"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+    <hr>
     <table class="table table-striped table-responsive-md">
       <thead>
       <tr>

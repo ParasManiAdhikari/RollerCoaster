@@ -1,6 +1,7 @@
 package de.th_luebeck.swt2praktikum.controllers.ParkController;
 
 
+import de.th_luebeck.swt2praktikum.entities.Achterbahn;
 import de.th_luebeck.swt2praktikum.entities.Park;
 import de.th_luebeck.swt2praktikum.repositories.ParkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @autor Baraa Hejazi
@@ -24,6 +28,8 @@ public class ParkController {
 
     @Autowired
     private ParkRepository parkRepository;
+
+    List<Park> parks;
 
     /**
      * Add park string.
@@ -97,8 +103,27 @@ public class ParkController {
      */
     @GetMapping("/showparks")
     public String showParks(Model model){
-        model.addAttribute("allparks", parkRepository.findAll());
+        parks = parkRepository.findAll();
+        model.addAttribute("allparks", parks);
+        model.addAttribute("mypark", new Park());
         return "parks";
+    }
+
+    /**
+     * @autor Paras Adhikari
+     * return searched Park.
+     */
+    @PostMapping(value = "/search")
+    public String searchCarByName(@ModelAttribute("mypark") Park mypark, Model model) {
+        List<Park> _parks = new LinkedList<>();
+        if(parks.size() > 0)
+            _parks = parks.stream().filter(a -> a.getName().toLowerCase().
+                    contains(mypark.getName().toLowerCase())
+            ).collect(Collectors.toList());
+        model.addAttribute("allparks", _parks);
+
+        return "parks";
+
     }
 
     /**
@@ -111,5 +136,6 @@ public class ParkController {
         model.addAttribute("mypark", chosenpark);
         return "dynamicpark";
     }
+
 
 }
