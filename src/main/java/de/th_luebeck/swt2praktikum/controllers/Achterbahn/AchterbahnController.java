@@ -58,11 +58,35 @@ public class AchterbahnController {
         } else if (bindingResult.hasErrors()) {
             model.addAttribute("checkallInput", "Bitte alle Felder ausfüllen!");
             return "addachterbahn";
-        } else {
-            achterbahnRepository.save(new Achterbahn(achterbahnInput.getName()));
-            return "redirect:/allAchterbahns";
-            }
+        } else
+            return addAchterbahn(achterbahnInput);
         return "redirect:/addachterbahn";
+    }
+
+    /**
+     * @autor Nitesh Bhattarai
+     * to add achterbahn
+     */
+    public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
+        achterbahnRepository.save(new Achterbahn(Achterbahninput.getName()));
+        return "redirect:/allAchterbahns";
+    }
+
+    /**
+     * @autor Paras Adhikari
+     * rate achterbahn
+     */
+    @PostMapping(value = "/submitCoasterRating")
+    public String submitRating(Model model) {
+        achterbahns = achterbahnRepository.findAll();
+        model.addAttribute("achterbahnlist", achterbahns);
+        return "myab";
+    }
+
+    @GetMapping(value = "/deleteachterbahn/{id}")
+    public String deleteAchterbahn(@PathVariable("id") Long id) {
+        achterbahnRepository.deleteById(id);
+        return "AchterbahnAnzeigen";
     }
 
     /**
@@ -74,24 +98,9 @@ public class AchterbahnController {
         achterbahns = achterbahnRepository.findAll();
         model.addAttribute("achterbahns", achterbahns);
         model.addAttribute("ratings", ratings);
+
         return "AchterbahnAnzeigen";
     }
-
-    /**
-     * @autor Paras Adhikari
-     * rate achterbahn
-     */
-    @PostMapping(value = "/submitCoasterRating")
-    public String submitRating(Model model) {
-        model.addAttribute("achterbahns", achterbahns);
-        return "myachterbahn";
-    }
-
-//    @GetMapping(value = "/deleteachterbahn/{id}")
-//    public String deleteAchterbahn(@PathVariable("id") Long id) {
-//        achterbahnRepository.deleteById(id);
-//        return "AchterbahnAnzeigen";
-//    }
 
     /**
      * @autor Ammar
