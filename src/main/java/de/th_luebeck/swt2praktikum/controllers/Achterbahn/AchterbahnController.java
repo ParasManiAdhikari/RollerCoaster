@@ -97,6 +97,7 @@ public class AchterbahnController {
     public String getAllAchterbahns(Model model){
         achterbahns = achterbahnRepository.findAll();
         model.addAttribute("achterbahns", achterbahns);
+        model.addAttribute("achterbahn", new Achterbahn());
         model.addAttribute("ratings", ratings);
 
         return "AchterbahnAnzeigen";
