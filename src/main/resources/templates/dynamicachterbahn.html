@@ -3,13 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>achterbahns</title>
+    <title>Kontoansicht</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap Link -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+            integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 </head>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
     <a class="navbar-brand" href="/index">TH Park</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
@@ -24,13 +28,12 @@
                             Fahrten eintragen
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="/showparks">Deutschland</a></li>
+                            <li><a class="dropdown-item" href="/AchterbahnAnyeigen">Deutschland</a></li>
                             <li><a class="dropdown-item" href="#">Österreich</a></li>
                             <li><a class="dropdown-item" href="#">Schweiz</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/addpark">Park erstellen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/addachterbahn">Achterbahn erstellen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/addachterbahn">Park erstellen</a></li>
                 </ul>
             </div>
         </ul>
@@ -40,57 +43,43 @@
         </ul>
     </div>
 </nav>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Achterbahnen</li>
+        <li class="breadcrumb-item"><a href="/showparks">Deutschland</a></li>
+        <li class="breadcrumb-item active" aria-current="page" th:text="${myachterbahn.name}"></li>
     </ol>
 </nav>
+
 <body>
 <div class="container my-5">
-<div class="row">
-    <h3>‣List Of Achterbahns</h3>
-    <div class="col">
-        <form th:action="@{/searchbahn}" th:object="${achterbahn}"
-              method="post">
-            <div class="col-md-10">
-                <div class="form-group">
-                    <input class="form-control"
-                           placeholder="Search by Name ..."
-                           type="search"
-                           th:field="*{name}"/>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col">
-        <a href="/GetRandomAchterbahn" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> zufällig Achterbahn</a>
-    </div>
-    <div class="col-md-10">
-        <div class="table-responsive">
-            <table id="achterbahns" class="table table-hover">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="achterbahn : ${achterbahns}">
-                    <td th:text="${achterbahn.id}"></td>
-                    <td th:text="${achterbahn.name}"></td>
-                    <td></td>
-
-                    <td><a th:href="@{'/Achterbahns/' + ${achterbahn.id}}" class="btn btn-default">Detail</a></td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="row mb-4">
+        <div class="col-sm-9">
+            <strong style="font-size: 2rem; font-family: 'Object Sans'" th:text="${myachterbahn.name}"></strong>
+        </div>
+        <div class="col-sm-3">
+            <a href="/addachterbahn" class="btn btn-primary float-right">Achterbahn erstellen</a>
         </div>
     </div>
-</div>
+    <hr>
+    <dl class="row">
+        <dt class="col-sm-3">Kurzbeschreibung:</dt>
+        <dd class="col-sm-9">Die Achterbahn: <simple th:text="${myachterbahn.name}"></simple> ist mit der ID <si th:text="${myachterbahn.id}"></si> eine der besten Achterbahnen Deutschlands. </dd>
+
+        <dt class="col-sm-3">ID:</dt>
+        <dd class="col-sm-9">
+            <p th:text="${myachterbahn.id}"></p>
+        </dd>
+
+        <!--     when achterbahnen are created they should be shown here as th:each-->
+        <dt class="col-sm-3">Achterbahnen:</dt>
+        <dd class="col-sm-9">
+            <p><a href="/index">Karacho</a></p>
+            <p><a href="/index">Volldampf</a></p>
+            <p><a href="/index">Mammut</a></p>
+        </dd>
+    </dl>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
