@@ -20,4 +20,5 @@ public class Swt2praktikumApplication implements WebMvcConfigurer {
 		viewControllerRegistry.addViewController("/index").setViewName("index");
 	}
 
+
 }
