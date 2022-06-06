@@ -130,6 +130,21 @@ public class AchterbahnController {
         return "Achterbahndeteil";
     }
 
+    /**
+     * @autor Ahmad Alyusef
+     * ausgewählte Achterbahn Anzeigen
+     */
+    @GetMapping("/Achterbahns/{id}")
+    public String chosenachterbahn(@PathVariable("id") long myid, Model model) {
+        Achterbahn chosenachterbahn = achterbahnRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid Rollercoaster Id:" + myid));
+
+        model.addAttribute("myachterbahn", chosenachterbahn);
+        return "dynamicachterbahn";
+    }
+
+
+
+
 
 
 }
