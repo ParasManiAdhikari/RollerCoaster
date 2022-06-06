@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -24,6 +22,16 @@ public class AchterbahnController {
     private AchterbahnRepository achterbahnRepository;
 
     List<Achterbahn> achterbahns;
+    //rating List
+    static List<String> ratings = null;
+    static{
+        ratings = new ArrayList<>();
+        ratings.add("⭐");
+        ratings.add("⭐⭐");
+        ratings.add("⭐⭐⭐");
+        ratings.add("⭐⭐⭐⭐");
+        ratings.add("⭐⭐⭐⭐⭐");
+    }
 
     public AchterbahnController(AchterbahnRepository mockedAchterbahnRepo){
         this.achterbahnRepository = mockedAchterbahnRepo;
@@ -50,28 +58,11 @@ public class AchterbahnController {
         } else if (bindingResult.hasErrors()) {
             model.addAttribute("checkallInput", "Bitte alle Felder ausfüllen!");
             return "addachterbahn";
-        } else
-            return addAchterbahn(achterbahnInput);
+        } else {
+            achterbahnRepository.save(new Achterbahn(achterbahnInput.getName()));
+            return "redirect:/allAchterbahns";
+            }
         return "redirect:/addachterbahn";
-    }
-
-    /**
-     * @autor Nitesh Bhattarai
-     * to add achterbahn
-     */
-    public String addAchterbahn(@ModelAttribute("Achterbahninput") AchterbahnInput Achterbahninput) {
-        achterbahnRepository.save(new Achterbahn(Achterbahninput.getName()));
-        return "redirect:/allAchterbahns";
-    }
-
-    /**
-     * @autor Nitesh Bhattarai
-     * to add achterbahn
-     */
-    @GetMapping(value = "/deleteachterbahn/{id}")
-    public String deleteAchterbahn(@PathVariable("id") Long id) {
-        achterbahnRepository.deleteById(id);
-        return "AchterbahnAnzeigen";
     }
 
     /**
@@ -82,10 +73,29 @@ public class AchterbahnController {
     public String getAllAchterbahns(Model model){
         achterbahns = achterbahnRepository.findAll();
         model.addAttribute("achterbahns", achterbahns);
-        model.addAttribute("achterbahn", new Achterbahn());
+        Achterbahn n = new Achterbahn("New AV");
+        achterbahns.add(n);
+        model.addAttribute("achterbahn", n);
+        model.addAttribute("ratings", ratings);
 
         return "AchterbahnAnzeigen";
     }
+
+    /**
+     * @autor Paras Adhikari
+     * rate achterbahn
+     */
+    @PostMapping(value = "/submitCoasterRating")
+    public String submitRating(Model model) {
+        model.addAttribute("achterbahns", achterbahns);
+        return "myachterbahn";
+    }
+
+//    @GetMapping(value = "/deleteachterbahn/{id}")
+//    public String deleteAchterbahn(@PathVariable("id") Long id) {
+//        achterbahnRepository.deleteById(id);
+//        return "AchterbahnAnzeigen";
+//    }
 
     /**
      * @autor Ammar

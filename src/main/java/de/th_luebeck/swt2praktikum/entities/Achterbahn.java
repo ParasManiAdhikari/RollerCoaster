@@ -19,6 +19,17 @@ public class Achterbahn {
     @Column(name = "name",nullable = false, unique = true)
     private String name;
 
+    @Column(name= "bewertung")
+    private String myrating;
+
+    public String getMyrating() {
+        return myrating;
+    }
+
+    public void setMyrating(String myrating) {
+        this.myrating = myrating;
+    }
+
     public Achterbahn() {
     }
 
@@ -26,5 +37,9 @@ public class Achterbahn {
         this.name = name;
     }
 
+    @Override
+    public String toString(){
+        return "Achterbahn [ name =" + name + "rating = " + myrating +" ]";
+    }
 
 }

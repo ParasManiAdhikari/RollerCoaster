@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
-    <a class="navbar-brand" href="/index">TH Park</a>
+    <a class="navbar-brand" href="#">TH Park</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
         <ul class="navbar-nav mr-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/addpark">Park erstellen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/addachterbahn">Achterbahn erstellen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/allAchterbahns">Achterbahnen Anzeigen</a></li>
                 </ul>
             </div>
         </ul>
@@ -43,54 +43,76 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Achterbahnen</li>
+        <li class="breadcrumb-item active" aria-current="page">List von Achterbahnen</li>
     </ol>
 </nav>
 <body>
 <div class="container my-5">
 <div class="row">
-    <h3>‣List Of Achterbahns</h3>
-    <div class="col">
-        <form th:action="@{/searchbahn}" th:object="${achterbahn}"
-              method="post">
-            <div class="col-md-10">
-                <div class="form-group">
-                    <input class="form-control"
-                           placeholder="Search by Name ..."
-                           type="search"
-                           th:field="*{name}"/>
-                </div>
+    <h3>List Of Achterbahns</h3>
+    <form th:action="@{/searchbahn}" th:object="${achterbahn}"
+          method="post">
+        <div class="col-md-10">
+            <div class="form-group">
+                <input class="form-control"
+                       placeholder="Search by Name ..."
+                       type="search"
+                       th:field="*{name}"/>
             </div>
-        </form>
-    </div>
-    <div class="col">
-        <a href="/GetRandomAchterbahn" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> zufällig Achterbahn</a>
+        </div>
+    </form>
+    <div class="col-md-2" style="margin-left: -12px;margin-right: 10px;">
+        <h2>
+            <a href="/GetRandomAchterbahn" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> zufällig Achterbahn</a>
+        </h2>
     </div>
     <div class="col-md-10">
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead class="thead-light">
+                <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th></th>
-                    <th></th>
-                    <th>Fahrten Eintragen</th>
+                    <th>Delete</th>
+                    <th>Details</th>
+                    <th>Bewerten</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="achterbahn : ${achterbahns}">
-                    <td th:text="${achterbahn.id}"></td>
-                    <td th:text="${achterbahn.name}"></td>
+                <tr th:each="achter : ${achterbahns}">
+                    <td th:text="${achter.id}"></td>
+                    <td th:text="${achter.name}"></td>
 <!--                    <td><a th:href="@{/deleteachterbahn/{id}(id=${achterbahn.id})}" class="btn btn-warning">Delete</a></td>-->
 <!--                    <td><a th:href="@{'/Achterbahndetails/' + ${achterbahn.id}}" class="btn btn-default">Detail</a></td>-->
-                    <td><a href="#" class="btn btn-danger">Delete</a></td>
-                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
-<!--                    Jannik macht hier Fahrten eintragen-->
-                    <td><a href="#" class="btn btn-warning">Fahrten eintragen</a></td>
+                    <td><a href="#" class="btn btn-warning">Delete</a></td>
+                    <td><a href="#" class="btn btn-default">Detail</a></td>
+                    <td>
+<!--                        <form th:action="@{/submitCoasterRating}" th:object="${achter}" method="POST">-->
+<!--                            <div class="col-12">-->
+<!--                                <select name="myrating">-->
+<!--                                    <option th:each="rating : ${ratings}" th:text="${rating}"/>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="col-12">-->
+<!--                                <input type="submit" value="Save" />-->
+<!--                                <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+                    </td>
+                    <td><a href="/submitCoasterRating">hello</a></td>
                 </tr>
                 </tbody>
             </table>
+            <form th:action="@{/submitCoasterRating}" th:object="${achterbahn}" method="POST">
+                <div class="col-12">
+                    <select name="myrating">
+                        <option th:each="rating : ${ratings}" th:text="${rating}"/>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <input type="submit" value="Save" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
