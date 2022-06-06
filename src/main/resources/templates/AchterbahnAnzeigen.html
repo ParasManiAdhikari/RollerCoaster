@@ -99,20 +99,9 @@
 <!--                            </div>-->
 <!--                        </form>-->
                     </td>
-                    <td><a href="/submitCoasterRating">hello</a></td>
                 </tr>
                 </tbody>
             </table>
-            <form th:action="@{/submitCoasterRating}" th:object="${achterbahn}" method="POST">
-                <div class="col-12">
-                    <select name="myrating">
-                        <option th:each="rating : ${ratings}" th:text="${rating}"/>
-                    </select>
-                </div>
-                <div class="col-12">
-                    <input type="submit" value="Save" />
-                </div>
-            </form>
         </div>
     </div>
 </div>
