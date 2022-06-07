@@ -35,21 +35,6 @@ public class AchterbahnController {
         ratings.add("⭐⭐⭐⭐⭐");
     }
 
-    @GetMapping(path = "/employee")
-    private String getEmployeeForm(Model model) {
-        model.addAttribute("ratings", ratings);
-        return "employee-form";
-    }
-
-    @PostMapping(path = "/employee")
-    private String submitEmployee(@ModelAttribute("employeeForm") Achterbahn achterbahn, Model model) {
-        model.addAttribute("employee", achterbahn);
-        Achterbahn achter = achterbahnRepository.findAll().get(0);
-        achter.setMyrating(achterbahn.getMyrating());
-        model.addAttribute("achter", achter);
-        return "Sucess";
-    }
-
     public AchterbahnController(AchterbahnRepository mockedAchterbahnRepo){
         this.achterbahnRepository = mockedAchterbahnRepo;
     }
@@ -181,6 +166,10 @@ public class AchterbahnController {
         return "dynamicachterbahn";
     }
 
+    /**
+     * @autor Paras Adhikari
+     * ausgewählte Achterbahn bewerten
+     */
     @PostMapping(path = "/saverating")
     private String submitAchterbahn(@ModelAttribute("achterbahnForm") Achterbahn achterbahn, Model model) {
         model.addAttribute("employee", achterbahn);
