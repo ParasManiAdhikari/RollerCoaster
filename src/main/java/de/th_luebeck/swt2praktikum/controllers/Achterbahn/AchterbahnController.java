@@ -12,18 +12,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
 public class AchterbahnController {
 
     @Autowired
-    private AchterbahnRepository achterbahnRepository;
+    private static AchterbahnRepository achterbahnRepository;
 
     List<Achterbahn> achterbahns;
+    Achterbahn currentAchterbahn;
+
+    //rating List
+    static List<String> ratings = null;
+    static{
+        ratings = new ArrayList<>();
+        ratings.add("⭐");
+        ratings.add("⭐⭐");
+        ratings.add("⭐⭐⭐");
+        ratings.add("⭐⭐⭐⭐");
+        ratings.add("⭐⭐⭐⭐⭐");
+    }
 
     public AchterbahnController(AchterbahnRepository mockedAchterbahnRepo){
         this.achterbahnRepository = mockedAchterbahnRepo;
@@ -65,9 +75,16 @@ public class AchterbahnController {
     }
 
     /**
-     * @autor Nitesh Bhattarai
-     * to add achterbahn
+     * @autor Paras Adhikari
+     * rate achterbahn
      */
+    @PostMapping(value = "/submitCoasterRating")
+    public String submitRating(Model model) {
+        achterbahns = achterbahnRepository.findAll();
+        model.addAttribute("achterbahnlist", achterbahns);
+        return "myab";
+    }
+
     @GetMapping(value = "/deleteachterbahn/{id}")
     public String deleteAchterbahn(@PathVariable("id") Long id) {
         achterbahnRepository.deleteById(id);
@@ -83,6 +100,7 @@ public class AchterbahnController {
         achterbahns = achterbahnRepository.findAll();
         model.addAttribute("achterbahns", achterbahns);
         model.addAttribute("achterbahn", new Achterbahn());
+        model.addAttribute("ratings", ratings);
 
         return "AchterbahnAnzeigen";
     }
@@ -142,9 +160,23 @@ public class AchterbahnController {
     @GetMapping("/Achterbahns/{id}")
     public String chosenachterbahn(@PathVariable("id") long myid, Model model) {
         Achterbahn chosenachterbahn = achterbahnRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid Rollercoaster Id:" + myid));
-
+        model.addAttribute("ratingss", ratings);
+        currentAchterbahn = chosenachterbahn;
         model.addAttribute("myachterbahn", chosenachterbahn);
         return "dynamicachterbahn";
+    }
+
+    /**
+     * @autor Paras Adhikari
+     * ausgewählte Achterbahn bewerten
+     */
+    @PostMapping(path = "/saverating")
+    private String submitAchterbahn(@ModelAttribute("achterbahnForm") Achterbahn achterbahn, Model model) {
+        model.addAttribute("employee", achterbahn);
+        currentAchterbahn.setMyrating(achterbahn.getMyrating());
+        model.addAttribute("ratedAB", currentAchterbahn);
+        achterbahnRepository.save(currentAchterbahn);
+        return "redirect:/allAchterbahns";
     }
 
 

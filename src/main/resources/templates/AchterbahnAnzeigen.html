@@ -73,18 +73,18 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>Delete</th>
+                    <th>Detail</th>
+                    <th>Bewertung</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="achterbahn : ${achterbahns}">
                     <td th:text="${achterbahn.id}"></td>
                     <td th:text="${achterbahn.name}"></td>
-                    <td></td>
-
-                    <td><a th:href="@{'/Achterbahns/' + ${achterbahn.id}}" class="btn btn-default">Detail</a></td>
+                    <td><a href="#" class="btn btn-danger">Delete</a></td>
+                    <td><a th:href="@{/Achterbahns/{id}(id=${achterbahn.id})}" class="btn btn-secondary">Detail</a></td>
+                    <td th:text="${achterbahn.myrating}"></td>
                 </tr>
                 </tbody>
             </table>
