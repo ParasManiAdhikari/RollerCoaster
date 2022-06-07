@@ -75,7 +75,7 @@
                     <th>Name</th>
                     <th></th>
                     <th></th>
-                    <th>Fahrten Eintragen</th>
+                    <th>Bewertung</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,7 +87,7 @@
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                     <td><a th:href="@{/Achterbahns/{id}(id=${achterbahn.id})}" class="btn btn-secondary">Detail</a></td>
 <!--                    Jannik macht hier Fahrten eintragen-->
-                    <td><a href="#" class="btn btn-warning">Fahrten eintragen</a></td>
+                    <td th:text="${achterbahn.myrating}"></td>
                 </tr>
                 </tbody>
             </table>

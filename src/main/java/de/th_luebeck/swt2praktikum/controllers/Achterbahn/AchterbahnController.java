@@ -22,6 +22,8 @@ public class AchterbahnController {
     private static AchterbahnRepository achterbahnRepository;
 
     List<Achterbahn> achterbahns;
+    Achterbahn currentAchterbahn;
+
     //rating List
     static List<String> ratings = null;
     static{
@@ -174,6 +176,7 @@ public class AchterbahnController {
     public String chosenachterbahn(@PathVariable("id") long myid, Model model) {
         Achterbahn chosenachterbahn = achterbahnRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid Rollercoaster Id:" + myid));
         model.addAttribute("ratingss", ratings);
+        currentAchterbahn = chosenachterbahn;
         model.addAttribute("myachterbahn", chosenachterbahn);
         return "dynamicachterbahn";
     }
@@ -181,10 +184,10 @@ public class AchterbahnController {
     @PostMapping(path = "/saverating")
     private String submitAchterbahn(@ModelAttribute("achterbahnForm") Achterbahn achterbahn, Model model) {
         model.addAttribute("employee", achterbahn);
-        Achterbahn achter = achterbahnRepository.findAll().get(0);
-        achter.setMyrating(achterbahn.getMyrating());
-        model.addAttribute("ratedAB", achter);
-        return "Success2";
+        currentAchterbahn.setMyrating(achterbahn.getMyrating());
+        model.addAttribute("ratedAB", currentAchterbahn);
+        achterbahnRepository.save(currentAchterbahn);
+        return "redirect:/allAchterbahns";
     }
 
 
