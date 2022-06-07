@@ -18,10 +18,6 @@ import java.util.stream.Collectors;
 @Controller
 public class AchterbahnController {
 
-    public static AchterbahnRepository getAchterbahnRepository() {
-        return achterbahnRepository;
-    }
-
     @Autowired
     private static AchterbahnRepository achterbahnRepository;
 
@@ -169,6 +165,33 @@ public class AchterbahnController {
         model.addAttribute("name", _name);
         return "AchterbahnDeteil";
     }
+
+    /**
+     * @autor Ahmad Alyusef
+     * ausgewählte Achterbahn Anzeigen
+     */
+    @GetMapping("/Achterbahns/{id}")
+    public String chosenachterbahn(@PathVariable("id") long myid, Model model) {
+        Achterbahn chosenachterbahn = achterbahnRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid Rollercoaster Id:" + myid));
+        model.addAttribute("ratingss", ratings);
+        model.addAttribute("myachterbahn", chosenachterbahn);
+        return "dynamicachterbahn";
+    }
+
+    @PostMapping(path = "/saverating")
+    private String submitAchterbahn(@ModelAttribute("achterbahnForm") Achterbahn achterbahn, Model model) {
+        model.addAttribute("employee", achterbahn);
+        Achterbahn achter = achterbahnRepository.findAll().get(0);
+        achter.setMyrating(achterbahn.getMyrating());
+        model.addAttribute("ratedAB", achter);
+        return "Success2";
+    }
+
+
+
+
+
+
 }
 
 
