@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.validation.Valid;
@@ -83,6 +84,10 @@ public class ParkController {
             model.addAttribute("checkallInput", "Alle Pflichtfelder müssen ausgefüllt werden");
             return "/addpark";
         }
+        else if (!bindingResult.hasErrors()) {
+            model.addAttribute("success", "Park successfully createrd");
+            return addPark(Parkinput);
+        }
         else
         return addPark(Parkinput);
     }
@@ -98,7 +103,7 @@ public class ParkController {
         parkRepository.save(new Park(Parkinput.getName(),
                         Parkinput.getEmailadress(), Parkinput.getAdresse(),
                 Parkinput.getFaxnummer(),Parkinput.getTelefonnummer()));
-        return "redirect:/showparks";
+        return "redirect:/parkCreated";
     }
 
 
@@ -140,6 +145,15 @@ public class ParkController {
         Park chosenpark = parkRepository.findById(myid).orElseThrow(() -> new IllegalArgumentException("Invalid park Id:" + myid));
         model.addAttribute("mypark", chosenpark);
         return "dynamicpark";
+    }
+
+    /**
+     * @autor Nitesh Bhattarai
+     * to add the success popup
+     */
+    @GetMapping("/parkCreated")
+    public String parkErstellt(Model model) {
+        return "parkErstellt";
     }
 
 
