@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb">
     <a class="navbar-brand" href="/index">TH Park</a>
@@ -25,7 +26,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="/showparks">Deutschland</a></li>
-                            <li><a class="dropdown-item" href="#">Österreich</a></li>
+                            <li><a class="dropdown-item" href="#">Ã–sterreich</a></li>
                             <li><a class="dropdown-item" href="#">Schweiz</a></li>
                         </ul>
                     </li>
@@ -48,49 +49,48 @@
 </nav>
 <body>
 <div class="container my-5">
-<div class="row">
-    <h3>‣List Of Achterbahns</h3>
-    <div class="col">
-        <form th:action="@{/searchbahn}" th:object="${achterbahn}"
-              method="post">
-            <div class="col-md-10">
-                <div class="form-group">
-                    <input class="form-control"
-                           placeholder="Search by Name ..."
-                           type="search"
-                           th:field="*{name}"/>
+    <div class="row">
+        <h3>â€£List Of Achterbahns</h3>
+        <div class="col">
+            <form th:action="@{/searchbahn}" th:object="${achterbahn}" method="post">
+                <div class="input-group ps-5">
+                    <div id="navbar-search-autocomplete" class="form-outline">
+                        <input type="search" placeholder="suchen mit Name ..." id="form1" class="form-control" th:field="*{name}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </div>
+            </form>
+        </div>
+        <div class="col">
+            <a href="/GetRandomAchterbahn" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> zufÃ¤llig Achterbahn</a>
+        </div>
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table id="achterbahns" class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Delete</th>
+                        <th>Detail</th>
+                        <th>Bewertung</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="achterbahn : ${achterbahns}">
+                        <td th:text="${achterbahn.id}"></td>
+                        <td th:text="${achterbahn.name}"></td>
+                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                        <td><a th:href="@{/Achterbahns/{id}(id=${achterbahn.id})}" class="btn btn-secondary">Detail</a></td>
+                        <td th:text="${achterbahn.myrating}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </form>
-    </div>
-    <div class="col">
-        <a href="/GetRandomAchterbahn" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> zufällig Achterbahn</a>
-    </div>
-    <div class="col-md-10">
-        <div class="table-responsive">
-            <table id="achterbahns" class="table table-hover">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Delete</th>
-                    <th>Detail</th>
-                    <th>Bewertung</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="achterbahn : ${achterbahns}">
-                    <td th:text="${achterbahn.id}"></td>
-                    <td th:text="${achterbahn.name}"></td>
-                    <td><a href="#" class="btn btn-danger">Delete</a></td>
-                    <td><a th:href="@{/Achterbahns/{id}(id=${achterbahn.id})}" class="btn btn-secondary">Detail</a></td>
-                    <td th:text="${achterbahn.myrating}"></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
-</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
