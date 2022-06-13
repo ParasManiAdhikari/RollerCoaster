@@ -23,7 +23,6 @@ public class RegistrationController {
     @Autowired
     private UserRepository userRepository;
 
-
     /**
      * Registration check string.
      *
